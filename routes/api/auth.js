@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const { check } = require("express-validator");
+const AuthController = require("../../Controller/AuthController");
 
-//import post model
-const User = require("../../models/user");
-
-//@routes GET api/user/
-//@desc   get all the post
+//@routes POST api/auth/login
+//@desc   login a user
 //@access Public
-router.get("/", (req, res) => {
-  User.find()
-    .sort({ date: -1 })
-    .then((users) => res.json(users))
-    .catch((err) => res.status(404).json({ msg: "No user found" }));
-});
+router.post(
+  "/login",
+  [
+    check("email", "Please include a valid email").isEmail(),
+    check("password", "Password is required").notEmpty(),
+  ],
+  AuthController.login
+);
 
 module.exports = router;

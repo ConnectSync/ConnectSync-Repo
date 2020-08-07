@@ -1,17 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const { check } = require("express-validator");
+const UserController = require("../../Controller/UserController");
 
-//import post model
-const User = require("../../models/user");
-
-//@routes GET api/user/
-//@desc   get all the post
+//@routes POST api/user/register
+//@desc   register a new user
 //@access Public
-router.get("/", (req, res) => {
-  User.find()
-    .sort({ date: -1 })
-    .then((users) => res.json(users))
-    .catch((err) => res.status(404).json({ msg: "No user found" }));
-});
+router.post(
+  "/register",
+  [
+    check("name", "Name is required").not().isEmpty(),
+    check("email", "Please include a valid email").isEmail(),
+    check(
+      "password",
+      "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 }),
+  ],
+  UserController.create
+);
 
 module.exports = router;

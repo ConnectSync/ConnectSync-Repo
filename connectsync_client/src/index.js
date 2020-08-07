@@ -1,11 +1,5 @@
 import React from "react";
+import Routes from "./Routes";
+import ReactDOM from "react-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <p>Hello World!</p>
-    </div>
-  );
-}
-
-export default App;
+ReactDOM.render(<Routes />, document.getElementById("root"));

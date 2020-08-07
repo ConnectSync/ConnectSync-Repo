@@ -4,7 +4,11 @@
   "description": "a social media app to connect co-workers",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "client": "npm run start --prefix connectsync",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "author": "",
   "license": "MIT",

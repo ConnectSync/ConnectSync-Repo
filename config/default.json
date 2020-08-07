@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://Dmn:dmn123@connectsync.gku5a.mongodb.net/ConnectSync?retryWrites=true&w=majority"
+}

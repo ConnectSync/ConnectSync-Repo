@@ -1,14 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const NavLists = ({ currentPage }) => {
   if (currentPage === "LandingPage") {
     return (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item px-1">
-          <button className="btn btn-primary">Register</button>
+          <Link to="/" className="btn btn-primary">
+            Register
+          </Link>
         </li>
         <li className="nav-item px-1">
-          <button className="btn btn-secondary">Login</button>
+          <Link to="/" className="btn btn-secondary">
+            Login
+          </Link>
         </li>
       </ul>
     );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLists } from "./NavLists";
+import { Link } from "react-router-dom";
 
 export const Navbar = ({ currentPage }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -15,7 +16,9 @@ export const Navbar = ({ currentPage }) => {
       <nav className="navbar navbar-expand-sm navbar-light fixed-top">
         <div className="container">
           <div className="navbar-brand text-white">
-            <h3 className="m-0">ConnectSync</h3>
+            <Link to="/" className="text-white">
+              <h3 className="m-0">ConnectSync</h3>
+            </Link>
           </div>
           {/* Navbar Toggle Button */}
           <button

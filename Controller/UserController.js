@@ -15,6 +15,20 @@ exports.index = async (req, res) => {
   }
 };
 
+exports.getUserById = async (req, res) => {
+  try {
+    console.log("id-", req.params.userId);
+    const user = await User.findById(req.params.userId).select(
+      "-password -updatedAt -createdAt"
+    );
+    console.log(user);
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+};
+
 exports.create = async (req, res) => {
   // console.log("creating user...");
   // console.log(req.header);
@@ -61,6 +75,62 @@ exports.create = async (req, res) => {
     );
   } catch (error) {
     console.error(error.message);
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+};
+
+exports.addBio = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { bio } = req.body;
+
+    const profile = await User.findOneAndUpdate(
+      { _id: req.user.id },
+      { $set: { "profile.bio": bio } },
+      { new: true }
+    ).select("-password -updatedAt -createdAt");
+    return res.json(profile);
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+};
+
+//add user bio
+exports.addResidence = async (req, res) => {
+  try {
+    const { residence } = req.body;
+
+    const profile = await User.findOneAndUpdate(
+      { _id: req.user.id },
+      { $set: { "profile.residence": residence } },
+      { new: true }
+    ).select("-password -updatedAt -createdAt");
+    return res.json(profile);
+  } catch (error) {
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+};
+
+//add social links
+exports.addSocialLinks = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { twitter, website, linkedin, instagram } = req.body;
+
+    const socialLinks = {};
+    if (twitter) socialLinks.twitter = twitter;
+    if (website) socialLinks.website = website;
+    if (linkedin) socialLinks.linkedin = linkedin;
+    if (instagram) socialLinks.instagram = instagram;
+
+    console.log(socialLinks);
+    const profile = await User.findOneAndUpdate(
+      { _id: req.user.id },
+      { $set: { "profile.social": socialLinks } },
+      { new: true }
+    ).select("-password -updatedAt -createdAt");
+    return res.json(profile);
+  } catch (error) {
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };

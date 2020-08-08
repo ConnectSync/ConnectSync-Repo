@@ -185,3 +185,51 @@ exports.updateDetails = async (req, res) => {
     return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
+
+exports.joinWorkplace = async (req, res) => {
+  try {
+    //after signing up, when user enters a workplace name, check if already exists, if exists, then make the
+    //user a member of the workplace
+    const workplace = await Workplace.findOne({
+      _id: req.params.workplaceId,
+      type: 'PUBLIC',
+    }).select('members');
+
+    if (!workplace) {
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'This workplace does not exists.' }] });
+    }
+
+    //check if the user already a member a not
+    if (
+      workplace.members.find((member) => member.user.toString() === req.user.id)
+    ) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'You are already a member' }] });
+    }
+
+    //if user is not already a member then push user to the member array.
+
+    workplace.members.push({
+      user: req.user.id,
+    });
+
+    const data = await workplace.save();
+
+    await User.updateOne(
+      { _id: req.user.id },
+      {
+        $push: {
+          workplaces: { workplace: data._id, status: 'JOINED' },
+        },
+      }
+    );
+
+    return res.json(data);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
+  }
+};

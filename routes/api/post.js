@@ -25,6 +25,30 @@ router.post(
   PostController.addPostWithImage
 );
 
+//@routes POST api/post/like/:postId
+//@desc   like post
+//@access Private
+router.post("/like/:postId", auth, PostController.addLike);
+
+//@routes POST api/post/unlike/:postId
+//@desc   dislike post
+//@access Private
+router.post("/unlike/:postId", auth, PostController.unLike);
+
+//@routes POST api/post/comment/:postId
+//@desc   add comment to post
+//@access Private
+router.post("/comment/:postId", auth, PostController.addComment);
+
+//@routes POST api/post/comment/delete/:postId/:commentId
+//@desc   delete comment
+//@access Private
+router.delete(
+  "/comment/delete/:postId/:commentId",
+  auth,
+  PostController.removeComment
+);
+
 //@routes GET api/post/:postId
 //@desc   get post by id
 //@access Private

@@ -4,7 +4,7 @@ import { Navbar } from "../../components/Navigation/Navbar";
 export const HomePage = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar currentPage="HomePage" />
       hi from home page
     </div>
   );

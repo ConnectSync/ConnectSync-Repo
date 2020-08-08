@@ -6,7 +6,7 @@ import { Navbar } from "../../components/Navigation/Navbar";
 export const LandingPage = () => {
   return (
     <div className="landing-page">
-      <Navbar />
+      <Navbar currentPage="LandingPage" />
       <HeroSection />
     </div>
   );

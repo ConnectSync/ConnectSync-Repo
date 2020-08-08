@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { NavLists } from "./NavLists";
 
-export const Navbar = () => {
+export const Navbar = ({ currentPage }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [navStatus, setNavStatus] = useState("collapse navbar-collapse");
   const navbarHandler = () => {
@@ -25,16 +26,8 @@ export const Navbar = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className={navStatus}>
-            {/* Conditional Render start */}
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item px-1">
-                <button className="btn btn-primary">Register</button>
-              </li>
-              <li className="nav-item px-1">
-                <button className="btn btn-secondary">Login</button>
-              </li>
-            </ul>
-            {/* Conditional Render end */}
+            {/* Conditional NavList Render */}
+            <NavLists currentPage={currentPage} />
           </div>
         </div>
       </nav>

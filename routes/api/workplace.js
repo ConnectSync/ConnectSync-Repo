@@ -52,10 +52,6 @@ router.get('/public/:workplaceName', WorkplaceController.getPublicWorkplace);
 // @routes POST api/workplace/join
 // @desc   join a existing workplace
 // @access Private
-router.post(
-  '/:workplaceId/join',
-  auth,
-  WorkplaceMemberController.joinWorkplace
-);
+router.post('/:workplaceId/join', auth, WorkplaceController.joinWorkplace);
 
 module.exports = router;

@@ -27,21 +27,12 @@ const schema = new mongoose.Schema(
           enum: ["JOINED", "LEFT", "REMOVED", "ADDED", "PENDING"],
           default: "JOINED",
         },
-        by: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "user",
-        },
         date: {
           type: Date,
           default: Date.now,
         },
       },
     ],
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
-      required: true,
-    },
     type: {
       type: String,
       enum: ["PUBLIC", "PRIVATE"],

@@ -42,6 +42,21 @@ const schema = new mongoose.Schema(
       },
     ],
     profile: {
+      mobile: {
+        type: String,
+      },
+      gender: {
+        type: String,
+        enum: ["M", "F", "O"], //male female other (empty if prefer not to say selected)
+      },
+      company: {
+        name: {
+          type: String,
+        },
+        role: {
+          type: String,
+        },
+      },
       residence: {
         type: String,
       },

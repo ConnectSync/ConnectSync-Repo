@@ -1,7 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://Dmn:dmn123@connectsync.gku5a.mongodb.net/ConnectSync?retryWrites=true&w=majority",
-  "jwtSecretKey": "superSecretJWTKey",
-  "cloudName": "dmn19",
-  "apiKey": "153143429934315",
-  "apiSecret": "h9FDjeVEiVQHPKAo_51baPXDeJc"
-}

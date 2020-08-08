@@ -1,7 +1,14 @@
 import api from "../../utils/api";
 //import axios from 'axios'
 import { setError, removeError } from "./error";
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED } from "./types";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+} from "./types";
 import setAuthToken from "../../utils/setAuthToken";
 
 // Load User
@@ -52,3 +59,33 @@ export const register = (authData) => async (dispatch) => {
     });
   }
 };
+
+// Login User
+export const login = (authData) => async (dispatch) => {
+  try {
+    const res = await api.post("/auth/login", authData);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+
+    dispatch(loadUser());
+    dispatch(removeError());
+  } catch (err) {
+    dispatch(removeError());
+
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setError(error.msg, "danger")));
+    }
+
+    dispatch({
+      type: LOGIN_FAIL,
+    });
+  }
+};
+
+// Logout
+export const logout = () => ({ type: LOGOUT });

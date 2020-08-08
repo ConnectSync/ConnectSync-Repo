@@ -1,7 +1,7 @@
-import { OPEN_POPUP, CLOSE_POPUP } from '../action/types';
+import { OPEN_POPUP, CLOSE_POPUP } from "../action/types";
 
 const initialState = {
-  activePopup: '',
+  activePopup: "",
   data: null,
 };
 

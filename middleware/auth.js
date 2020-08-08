@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 module.exports = function (req, res, next) {
   // Get token from header
-  const token = req.header('jwt-auth-token');
+  const token = req.header('x-auth-token');
 
   // Check if token exists
   if (!token) {

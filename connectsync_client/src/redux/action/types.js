@@ -1,3 +1,8 @@
+
+// popups
+export const OPEN_POPUP = 'OPEN_POPUP';
+export const CLOSE_POPUP = 'CLOSE_POPUP';
+
 export const SET_ERROR = "SET_ERROR";
 export const REMOVE_ERROR = "REMOVE_ERROR";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
@@ -9,3 +14,4 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const SIGNIN_WITH_GOOGLE = "SIGNIN_WITH_GOOGLE";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
+

@@ -1,0 +1,45 @@
+/* .modal-dialog {
+  max-width: 620px;
+} */
+
+h4 {
+    color: #222222;
+  }
+  
+  .modal-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+  }
+  
+  .close-btn {
+    right: 25px;
+    top: 20px;
+  }
+  
+  .modal-backdrop {
+    z-index: -1;
+    opacity: 0.8;
+    background: #161323;
+  }
+  
+  .modal-content {
+    min-height: 500px;
+  }
+  
+  /*StepThree*/
+  .image-placeholder {
+    height: 200px;
+    width: 200px;
+  }
+  
+  @media (max-width: 440px) {
+    .image-placeholder {
+      height: 150px;
+      width: 150px;
+    }
+  }
+  

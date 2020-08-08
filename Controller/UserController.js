@@ -15,6 +15,20 @@ exports.index = async (req, res) => {
   }
 };
 
+exports.getUserById = async (req, res) => {
+  try {
+    console.log("id-", req.params.userId);
+    const user = await User.findById(req.params.userId).select(
+      "-password -updatedAt -createdAt"
+    );
+    console.log(user);
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+};
+
 exports.create = async (req, res) => {
   // console.log("creating user...");
   // console.log(req.header);

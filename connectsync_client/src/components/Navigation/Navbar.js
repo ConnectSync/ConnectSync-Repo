@@ -16,6 +16,7 @@ export const Navbar = () => {
           <div className="navbar-brand text-white">
             <h3 className="m-0">ConnectSync</h3>
           </div>
+          {/* Navbar Toggle Button */}
           <button
             className="navbar-toggler"
             type="button"

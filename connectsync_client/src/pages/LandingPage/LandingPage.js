@@ -1,7 +1,7 @@
 import React from "react";
 import "./LandingPageStyles.scss";
 import { HeroSection } from "../../components/Landing/HeroSection";
-import { Navbar } from "../../components/Landing/Navbar";
+import { Navbar } from "../../components/Navigation/Navbar";
 
 export const LandingPage = () => {
   return (

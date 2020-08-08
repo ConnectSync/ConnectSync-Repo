@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { NavLists } from "./NavLists";
+import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({ currentPage }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [navStatus, setNavStatus] = useState("collapse navbar-collapse");
   const navbarHandler = () => {
@@ -14,8 +16,11 @@ export const Navbar = () => {
       <nav className="navbar navbar-expand-sm navbar-light fixed-top">
         <div className="container">
           <div className="navbar-brand text-white">
-            <h3 className="m-0">ConnectSync</h3>
+            <Link to="/" className="text-white">
+              <h3 className="m-0">ConnectSync</h3>
+            </Link>
           </div>
+          {/* Navbar Toggle Button */}
           <button
             className="navbar-toggler"
             type="button"
@@ -24,16 +29,8 @@ export const Navbar = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className={navStatus}>
-            {/* Conditional Render start */}
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item px-1">
-                <button className="btn btn-primary">Register</button>
-              </li>
-              <li className="nav-item px-1">
-                <button className="btn btn-secondary">Login</button>
-              </li>
-            </ul>
-            {/* Conditional Render end */}
+            {/* Conditional NavList Render */}
+            <NavLists currentPage={currentPage} />
           </div>
         </div>
       </nav>

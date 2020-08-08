@@ -1,5 +1,6 @@
 import React from "react";
 import Vector from "../../images/LandingVector.png";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   return (
@@ -14,8 +15,12 @@ export const HeroSection = () => {
               business owners to reunite their workers from anywhere during this
               global pandemic
             </p>
-            <button className="btn btn-primary mr-3">Get It For Free</button>
-            <button className="btn btn-secondary">Intro</button>
+            <Link to="/" className="btn btn-primary mr-3">
+              Get It For Free
+            </Link>
+            <Link to="/" className="btn btn-secondary">
+              Intro
+            </Link>
           </div>
           <div className="col-lg-6">
             <img className="w-100" src={Vector} alt="vector" />

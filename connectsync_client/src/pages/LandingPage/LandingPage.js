@@ -1,10 +1,11 @@
 import React from "react";
 import "./LandingPageStyles.scss";
+import { HeroSection } from "../../components/Landing/HeroSection";
 
 export const LandingPage = () => {
   return (
-    <div className="hero-section">
-      <div className="container">hi from landing page</div>
+    <div className="landing-page">
+      <HeroSection />
     </div>
   );
 };

@@ -1,7 +1,8 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const config = require("config");
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const User = require("../models/User");
 
 exports.index = async (req, res) => {
   try {
@@ -79,6 +80,64 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.signInWithGoogle = async (req, res) => {
+  console.log(req.body);
+  const { name, email } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+
+    if (user) {
+      console.log("user already exists...logging user in...");
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        config.get("jwtSecretKey"),
+        { expiresIn: "7 days" },
+        (err, token) => {
+          if (err) throw err;
+          console.log("success");
+          return res.json({ token });
+        }
+      );
+    } else {
+      user = new User({
+        name,
+        email,
+        method: "GOOGLE",
+      });
+
+      console.log("creating new user with google data", user);
+      await user.save();
+
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        config.get("jwtSecretKey"),
+        { expiresIn: "7 days" },
+        (err, token) => {
+          if (err) throw err;
+          console.log("token==", token);
+          res.json({ token });
+        }
+      );
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+};
+
 exports.addBio = async (req, res) => {
   try {
     console.log(req.body);
@@ -131,6 +190,25 @@ exports.addSocialLinks = async (req, res) => {
     ).select("-password -updatedAt -createdAt");
     return res.json(profile);
   } catch (error) {
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+  }
+};
+
+exports.addProfileImage = async (req, res) => {
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const user = await User.findOneAndUpdate(
+      { _id: req.user.id },
+      { $set: { img: result.secure_url } },
+      { new: true }
+    ).select("-password -updatedAt -createdAt");
+    if (result.secure_url) {
+      deleteFile(req.file.filename);
+      console.log("deleting");
+    }
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };

@@ -32,6 +32,8 @@ router.post(
   UserController.create
 );
 
+router.post("/signInWithGoogle", UserController.signInWithGoogle);
+
 router.post("/addSocialLinks", auth, UserController.addSocialLinks);
 router.post("/addBio", auth, UserController.addBio);
 router.post("/addResidence", auth, UserController.addResidence);

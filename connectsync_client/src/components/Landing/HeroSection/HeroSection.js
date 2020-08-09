@@ -1,8 +1,8 @@
-import React from "react";
-import Vector from "../../images/LandingVector.png";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Vector from '../../../images/LandingVector.png';
+import { Link } from 'react-router-dom';
 
-export const HeroSection = () => {
+const HeroSection = () => {
   return (
     <div className="hero-section  pt-5 text-white">
       <div className="container">
@@ -30,3 +30,5 @@ export const HeroSection = () => {
     </div>
   );
 };
+
+export default HeroSection;

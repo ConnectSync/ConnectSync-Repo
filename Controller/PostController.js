@@ -1,6 +1,6 @@
-const cloudinary = require("cloudinary").v2;
-const Post = require("../models/post");
-const { deleteFile } = require("../cloudinary/cloudinary");
+const cloudinary = require('cloudinary').v2;
+const Post = require('../models/Post');
+const { deleteFile } = require('../cloudinary/cloudinary');
 
 exports.index = async (req, res) => {
   try {
@@ -11,7 +11,7 @@ exports.index = async (req, res) => {
     res.json(posts);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -24,12 +24,12 @@ exports.addPost = async (req, res) => {
       user: req.user.id,
       text: req.body.text,
       workplaces: workplaces,
-    }).populate("user");
+    }).populate('user');
     const post = await newPost.save();
     return res.json(post);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -46,13 +46,13 @@ exports.addPostWithImage = async (req, res) => {
     const post = await newPost.save();
     if (result.secure_url) {
       deleteFile(req.file.filename);
-      console.log("deleting");
+      console.log('deleting');
     }
 
     return res.json(post);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -60,13 +60,13 @@ exports.addLike = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
     if (!post) {
-      return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+      return res.status(404).json({ errors: [{ msg: 'No post found!' }] });
     } else {
       if (
         post.likes.filter((like) => like.user.toString() === req.user.id)
           .length > 0
       ) {
-        return res.status(400).json({ msg: "User already liked this post..." });
+        return res.status(400).json({ msg: 'User already liked this post...' });
       } else {
         post.likes.push({
           user: req.user.id,
@@ -77,7 +77,7 @@ exports.addLike = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -85,7 +85,7 @@ exports.unLike = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
     if (!post) {
-      return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+      return res.status(404).json({ errors: [{ msg: 'No post found!' }] });
     } else {
       if (
         post.likes.filter((like) => like.user.toString() === req.user.id)
@@ -93,7 +93,7 @@ exports.unLike = async (req, res) => {
       ) {
         return res
           .status(400)
-          .json({ msg: "User have not liked this post yet..." });
+          .json({ msg: 'User have not liked this post yet...' });
       } else {
         const removeIndex = post.likes
           .map((item) => item.user.toString())
@@ -105,7 +105,7 @@ exports.unLike = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -113,7 +113,7 @@ exports.addComment = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
     if (!post) {
-      return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+      return res.status(404).json({ errors: [{ msg: 'No post found!' }] });
     } else {
       const newComment = {
         user: req.user.id,
@@ -125,7 +125,7 @@ exports.addComment = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -134,19 +134,19 @@ exports.removeComment = async (req, res) => {
     const post = await Post.findById(req.params.postId);
 
     if (!post) {
-      return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+      return res.status(404).json({ errors: [{ msg: 'No post found!' }] });
     } else {
       // Pull out comment
       const requiredComment = post.comments.find(
         (comment) => comment.id === req.params.commentId
       );
       if (!requiredComment) {
-        return res.status(404).json({ msg: "Comment doesnot exist" });
+        return res.status(404).json({ msg: 'Comment doesnot exist' });
       } else {
         if (requiredComment.user.toString() !== req.user.id) {
           return res
             .status(401)
-            .json({ msg: "You are not authorized to delete this comment!" });
+            .json({ msg: 'You are not authorized to delete this comment!' });
         }
 
         post.comments = post.comments.filter(
@@ -158,7 +158,7 @@ exports.removeComment = async (req, res) => {
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -166,11 +166,11 @@ exports.getPostByID = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
     if (!post) {
-      return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+      return res.status(404).json({ errors: [{ msg: 'No post found!' }] });
     }
     return res.json(post);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };

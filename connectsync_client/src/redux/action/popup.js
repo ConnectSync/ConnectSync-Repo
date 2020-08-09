@@ -1,24 +1,28 @@
-import { OPEN_POPUP, CLOSE_POPUP } from '../action/types';
+import { OPEN_POPUP, CLOSE_POPUP } from "./types";
 
-const initialState = {
-  activePopup: '',
-  data: null,
+export const openChangePopup = (name, data = null) => (dispatch) => {
+  // const body = document.getElementById('root');
+  // body.style.filter = 'blur(5px)';
+  let title = data;
+
+  if (name == "REGISTER")
+    title = "This is register dummy text (coming from popup action)";
+  if (name == "LOGIN")
+    title = "This is login dummy text (coming from popup action)";
+  if (name == "CREATE_PROFILE")
+    title = "This is CREATE PROFILE dummy text (coming from popup action)";
+
+  dispatch({
+    type: OPEN_POPUP,
+    payload: { name, data: data || title },
+  });
 };
 
-export default function (state = initialState, action) {
-  const { type, payload } = action;
-  switch (type) {
-    case OPEN_POPUP:
-      return {
-        ...state,
-        activePopup: payload.name,
-        data: payload.data,
-      };
+export const removePopup = () => (dispatch) => {
+  // const body = document.getElementById('root');
+  // body.style.filter = 'blur(0px)';
 
-    case CLOSE_POPUP:
-      return { ...state, activePopup: null, data: null };
-
-    default:
-      return state;
-  }
-}
+  dispatch({
+    type: CLOSE_POPUP,
+  });
+};

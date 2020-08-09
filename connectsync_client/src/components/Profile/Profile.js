@@ -91,12 +91,7 @@ const Profile = ({
       </div>
       <h5>{name}</h5>
       <small>{email}</small>
-      {typeof profile.company != "undefined" && (
-        <small className="mb-2">
-          {" "}
-          {profile.company.role} at {profile.company.name}
-        </small>
-      )}
+
       <p className="lead border-top w-100 text-center m-0 py-3">
         Active Workplaces{" "}
         {!isEditing && (

@@ -32,7 +32,7 @@ const Members = (props) => {
     return (
       <>
         <Navbar />
-        <p>You do not have any workplace setup!</p>
+        <p className="text-center"> You do not have any workplace setup!</p>
       </>
     );
   }

@@ -23,7 +23,7 @@ const Profile = ({
   workplaces: { active_workplaces },
 }) => {
   const userProps = { ...auth.user };
-  const { email, name, profile, workplaces } = userProps;
+  const { email, name, profile, workplaces, img } = userProps;
   const data = [];
   if (active_workplaces.length > 0) {
     active_workplaces.map((workPlaceName, index) => {
@@ -88,7 +88,7 @@ const Profile = ({
     return(
         <div className="profile all-center flex-column">
             <div className="profileImageDiv mt-5 mb-4">
-                <img src={userProps.img} className="profileImg" />
+                <img src={img} className="profileImg" />
             </div>
             <h5>{name}</h5>
             <small>{email}</small>

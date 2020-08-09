@@ -1,0 +1,53 @@
+.eachComment {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  background-color: #fff;
+  width: 60vw;
+  margin: 5px auto;
+  border-radius: 5px;
+  .userInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    .userName {
+      margin-left: 0.5rem;
+      font-weight: 700;
+    }
+    .delete {
+      margin-left: auto;
+      margin-right: 1rem;
+    }
+  }
+  .commentMsg {
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    text-align: left;
+    word-wrap: break-word;
+  }
+  .img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.commentInput {
+  width: 60%;
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

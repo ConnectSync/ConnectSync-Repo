@@ -37,7 +37,7 @@ const Navbar = ({ currentPage }) => {
 
           <div className={navStatus}>
             {/* Conditional NavList Render */}
-            {currentPage !== "HomePage" && <HomeNavs />}
+            {currentPage !== "LandingPage" && <HomeNavs />}
             {currentPage === "LandingPage" && <LandingNavs />}
           </div>
         </div>

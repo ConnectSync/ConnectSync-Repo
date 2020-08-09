@@ -7,6 +7,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SIGNIN_WITH_GOOGLE,
+  CREATE_WORKPLACE,
+  JOIN_WORKPLACE,
 } from "../action/types";
 
 const initialState = {
@@ -55,7 +57,13 @@ export default function (state = initialState, action) {
         loading: false,
         user: null,
       };
-
+    //workplace related:
+    case CREATE_WORKPLACE:
+    case JOIN_WORKPLACE:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }

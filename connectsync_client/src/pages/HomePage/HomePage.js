@@ -4,11 +4,18 @@ import Profile from "../../components/Profile/Profile"
 import Posts from "../../components/Posts/Posts"
 import PostTextarea from "../../components/Posts/PostTextarea"
 import "./HomePage.scss"
+import Loader from "../../components/Loader"
 
 import { connect } from "react-redux";
 
 
-const HomePage = () => {
+const HomePage = ({loading}) => {
+
+  if(loading) {
+    return(
+      <Loader />
+    )
+  } else {
   return (
     <div className="public">
       <Navbar currentPage="HomePage" />
@@ -25,6 +32,13 @@ const HomePage = () => {
       </div>
     </div>
   );
+  }
 };
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    loading:state.auth.loading
+  }
+}
+
+export default connect(mapStateToProps)(HomePage);

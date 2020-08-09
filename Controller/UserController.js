@@ -3,12 +3,14 @@ const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const cloudinary = require("cloudinary").v2;
+const { deleteFile } = require("../cloudinary/cloudinary");
 
 exports.index = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user.id }).select(
-      "-password -updatedAt -createdAt"
-    );
+    const user = await User.findOne({ _id: req.user.id })
+      .populate("workplaces.workplace", "name img description")
+      .select("-password -updatedAt -createdAt");
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -19,9 +21,9 @@ exports.index = async (req, res) => {
 exports.getUserById = async (req, res) => {
   try {
     console.log("id-", req.params.userId);
-    const user = await User.findById(req.params.userId).select(
-      "-password -updatedAt -createdAt"
-    );
+    const user = await User.findById(req.params.userId)
+      .populate("workplaces.workplace", "name img")
+      .select("-password -updatedAt -createdAt");
     console.log(user);
     res.json(user);
   } catch (err) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom"
 
 import { openChangePopup } from '../../../redux/action/popup';
 
@@ -9,6 +10,10 @@ const LandingNavs = ({ openChangePopup, isAuthenticated }) =>
     <ul className="navbar-nav ml-auto">
       <li className="nav-item px-1">
         <button className="btn btn-primary text-dark">Logout</button>
+      </li>
+      <li className="nav-item px-1">
+        <Link to="/home" className="btn btn-primary text-dark">Home</Link>
+        {/* <button className="btn btn-primary text-dark">Home</button> */}
       </li>
     </ul>
   ) : (

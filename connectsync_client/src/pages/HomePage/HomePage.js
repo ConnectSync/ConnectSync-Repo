@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../../components/Navbar';
 import Profile from "../../components/Profile/Profile"
 import Posts from "../../components/Posts/Posts"
+import PostTextarea from "../../components/Posts/PostTextarea"
 import "./HomePage.scss"
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
             <Profile />
         </div>
         <div className="col-lg-6 ml-lg-4 px-5">
+              <PostTextarea />
               <Posts />
         </div>
         </div>

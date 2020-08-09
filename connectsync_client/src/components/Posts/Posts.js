@@ -6,7 +6,7 @@ const Posts = (props) => {
 
     return(
         <div>
-            Posts
+            <Post />
         </div>
     )
 

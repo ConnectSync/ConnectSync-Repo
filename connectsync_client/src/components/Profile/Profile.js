@@ -1,9 +1,9 @@
 import React from "react"
-import "./ProfileStlyes.css"
+import "./ProfileStlyes.scss"
 
 const Profile = (props) => {
     return(
-        <div className="profile all-center">
+        <div className="profile all-center flex-column">
             <div className="profileImageDiv mt-5 mb-4">
                 <img src="..." className="profileImg" />
             </div>

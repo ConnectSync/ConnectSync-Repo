@@ -1,0 +1,36 @@
+.select-workplace {
+    display: none;
+  }
+  .text-input {
+    resize: none;
+  }
+  .send-to {
+    background-color: #7858f8e0;
+    padding: 5px;
+    color: white;
+  }
+  .text-area {
+      resize: none;
+  }
+  /* #custom-button {
+    padding: 5px;
+    color: black;
+    background-color: lightcoral;
+    border: 1px solid 5px;
+    cursor: pointer;
+  }
+  #custom-button:hover {
+    background-color: lightcyan;
+  } */
+  
+  .img-display {
+    height: 100%;
+    width: 100%;
+  }
+  .toggle {
+    display: none;
+  }
+  .img-holder {
+    height: 200px;
+  }
+  

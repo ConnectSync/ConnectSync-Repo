@@ -1,20 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const HomeNavs = () => {
   return (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item px-1">
-        <div className="nav-link">Home</div>
+        <Link to="/home" className="nav-link">
+          Home
+        </Link>
       </li>
       <li className="nav-item px-1">
-        <div className="nav-link">Members</div>
+        <Link to="/members" className="nav-link">
+          Members
+        </Link>
       </li>
       <li className="nav-item px-1">
-        <div className="nav-link">Chats</div>
+        <Link to="/chats" className="nav-link">
+          Chats
+        </Link>
       </li>
       <li className="nav-item px-1">
-        <div className="nav-link">Profile</div>
+        <Link to="/profile" className="nav-link">
+          Profile
+        </Link>
       </li>
     </ul>
   );

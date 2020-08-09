@@ -6,6 +6,7 @@ import workplaces from "./workplaces";
 import member from "./member";
 import popup from "./popup";
 
+
 export default combineReducers({
   auth,
   error,
@@ -13,4 +14,5 @@ export default combineReducers({
   workplaces,
   member,
   popup,
+  workplaces
 });

@@ -19,7 +19,7 @@ const Navbar = ({ currentPage }) => {
 
   return (
     <div className="navigation-bar">
-      <nav className="navbar navbar-expand-sm navbar-light fixed-top">
+      <nav className="navbar navbar-expand-sm navbar-light">
         <div className="container">
           <div className="navbar-brand text-white">
             <Link to="/" className="text-white">

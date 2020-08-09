@@ -8,3 +8,23 @@
     height: 100%;
     width: 100%;
   }
+  .deActiveWP,
+.currentWP,
+.activeWP {
+  padding: 5px;
+  text-decoration: none;
+  width: 80%;
+  margin: 1px auto;
+  list-style-type: circle;
+  cursor: pointer;
+}
+.activeWP {
+  background-color: #7858f8;
+  color: white;
+  border-radius: 3px;
+}
+
+i {
+  cursor: pointer;
+}
+

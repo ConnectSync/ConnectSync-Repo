@@ -1,8 +1,8 @@
-const { validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const User = require("../models/user");
+const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const User = require('../models/User');
 
 exports.login = async (req, res) => {
   const errors = validationResult(req);
@@ -18,7 +18,7 @@ exports.login = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ errors: [{ msg: "This user does not exists." }] });
+        .json({ errors: [{ msg: 'This user does not exists.' }] });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res
         .status(400)
-        .json({ errors: [{ msg: "Invalid Credentials!" }] });
+        .json({ errors: [{ msg: 'Invalid Credentials!' }] });
     }
 
     const payload = {
@@ -37,15 +37,15 @@ exports.login = async (req, res) => {
 
     jwt.sign(
       payload,
-      config.get("jwtSecretKey"),
-      { expiresIn: "7 days" },
+      config.get('jwtSecretKey'),
+      { expiresIn: '7 days' },
       (err, token) => {
         if (err) throw err;
-        console.log("success");
+        console.log('success');
         return res.json({ token });
       }
     );
   } catch (err) {
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };

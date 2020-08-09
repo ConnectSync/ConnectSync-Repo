@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import HomeNavs from './HomeNavs';
-import LandingNavs from './LandingNavs';
+import HomeNavs from "./HomeNavs";
+import LandingNavs from "./LandingNavs";
 
 const Navbar = ({ currentPage }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
-  const [navStatus, setNavStatus] = useState('collapse navbar-collapse');
+  const [navStatus, setNavStatus] = useState("collapse navbar-collapse");
 
   const navbarHandler = () => {
     setNavbarOpen(!navbarOpen);
     setNavStatus(
-      `collapse navbar-collapse text-center ${navbarOpen ? '' : 'show'}`
+      `collapse navbar-collapse text-center ${navbarOpen ? "" : "show"}`
     );
   };
 
@@ -37,8 +37,8 @@ const Navbar = ({ currentPage }) => {
 
           <div className={navStatus}>
             {/* Conditional NavList Render */}
-            {currentPage === 'HomePage' && <HomeNavs />}
-            {currentPage === 'LandingPage' && <LandingNavs />}
+            {currentPage !== "LandingPage" && <HomeNavs />}
+            {currentPage === "LandingPage" && <LandingNavs />}
           </div>
         </div>
       </nav>

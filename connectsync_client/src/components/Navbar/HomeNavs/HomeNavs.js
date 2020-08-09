@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { loadUser, logout } from "../../../redux/action/auth";
@@ -29,6 +30,7 @@ const HomeNavs = ({auth,logout}) => {
   };
 
   const userProps = { ...auth.user };
+
 
   return (
     // <nav className="header navbar navbar-expand-sm navbar-light">
@@ -120,16 +122,24 @@ const HomeNavs = ({auth,logout}) => {
     // </nav>
     <ul className="navbar-nav ml-auto">
       <li className="nav-item px-1">
-        <div className="nav-link">Home</div>
+        <Link to="/home" className="nav-link">
+          Home
+        </Link>
       </li>
       <li className="nav-item px-1">
-        <div className="nav-link">Members</div>
+        <Link to="/members" className="nav-link">
+          Members
+        </Link>
       </li>
       <li className="nav-item px-1">
-        <div className="nav-link">Chats</div>
+        <Link to="/chats" className="nav-link">
+          Chats
+        </Link>
       </li>
       <li className="nav-item px-1">
-        <div className="nav-link">Profile</div>
+        <Link to="/profile" className="nav-link">
+          Profile
+        </Link>
       </li>
     </ul>
   );

@@ -22,3 +22,7 @@ export const DELETE_POST = "DELETE_POST";
 export const UPDATE_LIKES = "UPDATE_LIKES";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
+
+//workplace
+export const CREATE_WORKPLACE = "CREATE_WORKPLACE";
+export const JOIN_WORKPLACE = "JOIN_WORKPLACE";

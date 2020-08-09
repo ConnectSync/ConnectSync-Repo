@@ -1,6 +1,6 @@
-import React from 'react';
-import PopupContainer from "./PopupContainer"
-import { connect } from 'react-redux';
+import React from "react";
+import PopupContainer from "./PopupContainer";
+import { connect } from "react-redux";
 import { getAllPublicWorkplaces } from "../../redux/action/workplaces";
 
 const mapStateToProps = (state) => ({
@@ -28,7 +28,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
       return (
         <PopupContainer ref={modelRef}>
           <div className="text-center">
-            {modalView === 'create' ? (
+            {modalView === "create" ? (
               <h3>Initializing 'Create Workplace'...</h3>
             ) : (
               <h3>Initializing 'Join Workplace'...</h3>
@@ -43,7 +43,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
         <PopupContainer ref={modelRef}>
           <div>
             <div className="text-center">
-              {modalView === 'create' ? (
+              {modalView === "create" ? (
                 <h3>Create Workplace</h3>
               ) : (
                 <h3>Join Workplace</h3>
@@ -61,7 +61,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
                   id="name"
                   list="workplaceNames"
                   autoComplete="off"
-                  onChange={handleChange('name')}
+                  onChange={handleChange("name")}
                 />
                 <datalist id="workplaceNames">
                   {publicWorkplaces.map((publicWorkplace) => (
@@ -72,7 +72,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
                   ))}
                 </datalist>
               </div>
-              {modalView === 'create' && (
+              {modalView === "create" && (
                 <React.Fragment>
                   <div className="form-group">
                     <label htmlFor="description">Description</label>
@@ -83,13 +83,13 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
                       value={description}
                       name="description"
                       id="description"
-                      onChange={handleChange('description')}
+                      onChange={handleChange("description")}
                     />
                   </div>
                   <div className="form-group">
                     <label htmlFor="type">Type*</label>
                     <select
-                      onChange={handleChange('type')}
+                      onChange={handleChange("type")}
                       className="custom-select"
                       id="type"
                       value={type}
@@ -106,7 +106,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
               )}
 
               <div className="text-center">
-                {modalView === 'create' ? (
+                {modalView === "create" ? (
                   <button
                     onClick={create}
                     className="btn-style text-center mt-3 px-5 btn btn-primary bg-primary"

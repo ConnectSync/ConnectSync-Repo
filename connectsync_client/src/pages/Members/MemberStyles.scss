@@ -1,0 +1,63 @@
+.membersPage {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 100vh;
+}
+
+h5 {
+  margin-bottom: 1rem;
+}
+.mainMemberSection {
+  width: 80vw;
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  margin: 1rem auto;
+}
+.workplaceDiv,
+.memberDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.workplaceDiv {
+  border-right: 0.5px solid #33333350;
+}
+.activeWorkplace {
+  background-color: #7858f8;
+  padding: 5px;
+  border-radius: 5px;
+  list-style: none;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.deactiveWorkplace {
+  padding: 5px;
+  list-style: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.memberDataRow {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 0.5px solid #33333340;
+  .img img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+  .memberName {
+    padding-left: 1rem;
+  }
+}

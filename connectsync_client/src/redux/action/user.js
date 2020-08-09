@@ -2,6 +2,7 @@ import api from "../../utils/api";
 import axios from "axios";
 import { setError, removeError } from "./error";
 import { GET_USER_BY_ID } from "./types";
+import { loadUser } from "./auth";
 
 export const getUserByID = (userId) => async (dispatch) => {
   try {
@@ -28,6 +29,7 @@ export const getUserByID = (userId) => async (dispatch) => {
 
 export const addProfileImage = (postData) => async (dispatch) => {
   try {
+    console.log("image sending...", postData);
     const token = localStorage.getItem("token");
     const config = {
       headers: {

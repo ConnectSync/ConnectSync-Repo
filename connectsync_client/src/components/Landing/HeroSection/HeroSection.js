@@ -1,5 +1,5 @@
 import React from 'react';
-import Vector from '../../../images/LandingVector.png';
+import Vector from "../../../images/LandingHeroVector.png";
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {

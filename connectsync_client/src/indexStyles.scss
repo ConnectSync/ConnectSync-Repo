@@ -1,0 +1,69 @@
+$theme: #7858f8e0;
+$light-theme: #7858f828;
+$mainBtn: #ffffff;
+$mainBtnHover: #7858f8;
+$themeColor: #ffffff;
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', cursive;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-weight: 500;
+}
+
+.btn-primary,
+.btn-primary:hover {
+  background: $mainBtn;
+  color: black;
+  &:hover {
+    background: $mainBtnHover;
+  }
+}
+
+.btn-secondary,
+.btn-secondary:hover {
+  background: $theme;
+  color: $themeColor;
+  &:hover {
+    background: $mainBtnHover;
+  }
+}
+
+label {
+  font-size: 14px;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #a58fff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #7858f821;
+}
+
+.all-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-style {
+  background-color: #7858f8e0 !important;
+  color: white !important;
+}
+.btn-style:hover {
+  background-color: #7858f8 !important;
+}

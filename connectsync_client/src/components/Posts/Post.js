@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import "./PostStyles.css"
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import {getPostByID,addLike} from "../../redux/action/posts"
+import {getPostByID,addLike,removeLike} from "../../redux/action/posts"
 
 
 
@@ -18,6 +18,7 @@ const Post = (props) => {
       } = props;
     //initial heart class
     const [heart, setHeart] = useState("fa-heart-o");
+    const [numLikes,setNumLikes] = useState(likes.length)
     const postId = _id;
     const ifPostImg = () => {
         if (postImg) {
@@ -111,4 +112,6 @@ const mapStateToProps = (state) => ({
   
   export default connect(mapStateToProps, {
     getPostByID,
+    addLike,
+    removeLike
   })(Post);

@@ -59,6 +59,7 @@ export const joinWorkplace = (name) => async (dispatch) => {
 
 export const getAllPublicWorkplaces = () => async (dispatch) => {
   try {
+    console.log("i here");
     const res = await api.get("/workplace/");
     console.log("workplaces=", res.data);
     dispatch({

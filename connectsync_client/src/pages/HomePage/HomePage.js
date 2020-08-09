@@ -1,11 +1,10 @@
-
-import React,{useState,useRef} from 'react';
-import Navbar from '../../components/Navbar';
-import Profile from "../../components/Profile/Profile"
-import Posts from "../../components/Posts/Posts"
-import PostTextarea from "../../components/Posts/PostTextarea"
-import "./HomePage.scss"
-import Loader from "../../components/Loader"
+import React, { useState, useRef } from "react";
+import Navbar from "../../components/Navbar";
+import Profile from "../../components/Profile/Profile";
+import Posts from "../../components/Posts/Posts";
+import PostTextarea from "../../components/Posts/PostTextarea";
+import "./HomePage.scss";
+import Loader from "../../components/Loader";
 import {
   createWorkplace,
   joinWorkplace,
@@ -14,15 +13,21 @@ import {
   setActiveWorkplaces,
 } from "../../redux/action/workplaces";
 import { getAllPosts } from "../../redux/action/posts";
-import WorkplacePopup from "../../components/Popup/WorkplacePopup"
-import {Redirect} from "react-router-dom"
-
+import WorkplacePopup from "../../components/Popup/WorkplacePopup";
+import { Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 
-
-const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,setActiveWorkplaces,getAllPosts,workplaces:{active_workplaces}}) => {
-
+const HomePage = ({
+  isAuthenticated,
+  user,
+  loading,
+  createWorkplace,
+  joinWorkplace,
+  setActiveWorkplaces,
+  getAllPosts,
+  workplaces: { active_workplaces },
+}) => {
   const [worlplaceDetails, setWorkPlaceDetails] = useState({
     name: "",
     description: "",
@@ -31,8 +36,7 @@ const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,se
   });
   const [modalView, setModalView] = useState("create");
   const modelRef = useRef();
-  console.log("WOROROR ",active_workplaces)
-
+  console.log("WOROROR ", active_workplaces);
 
   //openpopupmodel
   const popupOpenModal = (view) => {
@@ -66,17 +70,14 @@ const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,se
   };
 
   const conditionalRender = () => {
-    if(loading) {
-      return(
-        <Loader />
-      )
-
+    if (loading) {
+      return <Loader />;
     } else {
       const { workplaces, profile } = user;
       console.log("Work ", user);
       console.log("profile ", profile);
 
-      if(Array.isArray(workplaces) && workplaces.length) {
+      if (Array.isArray(workplaces) && workplaces.length) {
         const data = [];
         if (active_workplaces.length === 0) {
           workplaces.map(({ workplace }) => {
@@ -89,23 +90,23 @@ const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,se
           <>
             <div className="col-lg-3 mb-5 p-0 w-75 mx-lg-0 mx-auto">
               <Profile
-              modalView={modalView}
-              handleChange={handleChange}
-              create={create}
-              join={join}
-              workplace_name={name}
-              workplace_description={description}
-              workplace_type={type}
-              modelRef={modelRef}
-              popupOpenModal={popupOpenModal}
-               />
+                modalView={modalView}
+                handleChange={handleChange}
+                create={create}
+                join={join}
+                workplace_name={name}
+                workplace_description={description}
+                workplace_type={type}
+                modelRef={modelRef}
+                popupOpenModal={popupOpenModal}
+              />
             </div>
             <div className="col-lg-6 ml-lg-4 px-5">
               <PostTextarea />
               <Posts />
             </div>
           </>
-        )
+        );
       } else {
         return (
           <div className="d-flex flex-column align-items-center justify-content-center col-lg-6 px-5">
@@ -130,32 +131,31 @@ const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,se
               </button>
             </div>
             <WorkplacePopup
-            modalView={modalView}
-            handleChange={handleChange}
-            create={create}
-            join={join}
-            name={name}
-            description={description}
-            type={type}
-            success={success}
-            modelRef={modelRef} />
+              modalView={modalView}
+              handleChange={handleChange}
+              create={create}
+              join={join}
+              name={name}
+              description={description}
+              type={type}
+              success={success}
+              modelRef={modelRef}
+            />
           </div>
-        )
+        );
       }
     }
-  }
+  };
   const performRedirect = () => {
     if (success) {
       modelRef.current.closeModal();
       return <Redirect to="/home" />;
     }
   };
-  if(loading) {
-    return(
-      <Loader />
-    )
+  if (loading) {
+    return <Loader />;
   } else {
-    if(!isAuthenticated) {
+    if (!isAuthenticated) {
       return <Redirect to="/" />;
     } else {
       return (
@@ -164,13 +164,11 @@ const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,se
           <div className="container">
             <div className="row mt-5 px-4 no-workplace-render">
               {conditionalRender()}
-
             </div>
           </div>
           {performRedirect()}
-
         </div>
-      )
+      );
     }
   }
 };
@@ -182,12 +180,14 @@ const mapStateToProps = (state) => {
     error: state.error,
     loading: state.auth.loading,
     workplaces: state.workplaces,
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps,{createWorkplace,
+export default connect(mapStateToProps, {
+  createWorkplace,
   joinWorkplace,
   getAllPublicWorkplaces,
   getAllWorkplacesMembers,
   setActiveWorkplaces,
-  getAllPosts,})(HomePage);
+  getAllPosts,
+})(HomePage);

@@ -1,15 +1,14 @@
-import React,{useState} from "react"
-import { connect } from 'react-redux';
-import { loadUser } from "../../redux/action/auth"
-import { getAllPosts } from '../../redux/action/posts';
-import { setActiveWorkplaces } from '../../redux/action/workplaces';
-import WorkPlacePopup from "../Popup/WorkplacePopup" 
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { loadUser } from "../../redux/action/auth";
+import { getAllPosts } from "../../redux/action/posts";
+import { setActiveWorkplaces } from "../../redux/action/workplaces";
+import WorkPlacePopup from "../Popup/WorkplacePopup";
 
-
-import "./ProfileStlyes.scss"
+import "./ProfileStyles.scss";
 
 const Profile = ({
-    auth,
+  auth,
   modalView,
   handleChange,
   create,
@@ -61,7 +60,7 @@ const Profile = ({
       workplace: { name: workPlaceName },
       status,
     } = workplace;
-    if (status === 'JOINED' || status === 'ADDED') {
+    if (status === "JOINED" || status === "ADDED") {
       if (activeWorkplacesState.includes(workPlaceName)) {
         return (
           <li
@@ -84,6 +83,7 @@ const Profile = ({
       );
     }
   });
+
     
     return(
         <div className="profile all-center flex-column">
@@ -142,16 +142,17 @@ const Profile = ({
                     Join +
                 </button>
             </div>
+
       )}
       <WorkPlacePopup
-      style={{
-        position: 'absolute',
-        zIndex: 100,
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 100 + '%',
-      }}
+        style={{
+          position: "absolute",
+          zIndex: 100,
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 100 + "%",
+        }}
         modalView={modalView}
         handleChange={handleChange}
         create={create}
@@ -160,19 +161,18 @@ const Profile = ({
         description={workplace_description}
         type={workplace_type}
         modelRef={modelRef}
-       />
-
+      />
     </div>
-    )
-}
+  );
+};
 
 const mapStateToProps = (state) => ({
-    auth: state.auth,
-    workplaces: state.workplaces,
-  });
+  auth: state.auth,
+  workplaces: state.workplaces,
+});
 
-export default connect(mapStateToProps,{
-    loadUser,
-    getAllPosts,
-    setActiveWorkplaces,
-  })(Profile)
+export default connect(mapStateToProps, {
+  loadUser,
+  getAllPosts,
+  setActiveWorkplaces,
+})(Profile);

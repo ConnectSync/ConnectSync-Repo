@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import HomeNavs from "./HomeNavs";
 import LandingNavs from "./LandingNavs";
+import "./NavBarStyles.scss";
 
 const Navbar = ({ currentPage }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -17,7 +18,7 @@ const Navbar = ({ currentPage }) => {
   };
 
   return (
-    <div>
+    <div className="navigation-bar">
       <nav className="navbar navbar-expand-sm navbar-light fixed-top">
         <div className="container">
           <div className="navbar-brand text-white">

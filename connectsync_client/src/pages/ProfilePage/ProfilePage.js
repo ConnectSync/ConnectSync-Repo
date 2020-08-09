@@ -2,7 +2,10 @@ import React from "react";
 import Navbar from "../../components/Navbar";
 import "./ProfilePageStyles.scss";
 
-export const ProfilePage = () => {
+import { connect } from "react-redux";
+import { loadUser } from "../../redux/action/auth";
+
+const ProfilePage = ({ auth }) => {
   return (
     <div className="profilePage py-5">
       <Navbar />
@@ -25,3 +28,9 @@ export const ProfilePage = () => {
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(ProfilePage);

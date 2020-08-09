@@ -1,12 +1,9 @@
-
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { loadUser, logout } from "../../../redux/action/auth";
 import { connect } from "react-redux";
 
-
-const HomeNavs = ({auth,logout}) => {
-
+const HomeNavs = ({ auth, logout }) => {
   //initail states
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownStatus, setDropdownStatus] = useState(
@@ -30,7 +27,6 @@ const HomeNavs = ({auth,logout}) => {
   };
 
   const userProps = { ...auth.user };
-
 
   return (
     // <nav className="header navbar navbar-expand-sm navbar-light">
@@ -118,26 +114,25 @@ const HomeNavs = ({auth,logout}) => {
     //     </div>
     //   </div>
 
-
     // </nav>
     <ul className="navbar-nav ml-auto">
       <li className="nav-item px-1">
-        <Link to="/home" className="nav-link">
+        <Link to="/home" className="nav-link text-white">
           Home
         </Link>
       </li>
       <li className="nav-item px-1">
-        <Link to="/members" className="nav-link">
+        <Link to="/members" className="nav-link text-white">
           Members
         </Link>
       </li>
       <li className="nav-item px-1">
-        <Link to="/chats" className="nav-link">
+        <Link to="/chats" className="nav-link text-white">
           Chats
         </Link>
       </li>
       <li className="nav-item px-1">
-        <Link to="/profile" className="nav-link">
+        <Link to="/profile" className="nav-link text-white">
           Profile
         </Link>
       </li>
@@ -149,4 +144,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps,{loadUser,logout})(HomeNavs);
+export default connect(mapStateToProps, { loadUser, logout })(HomeNavs);

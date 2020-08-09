@@ -1,33 +1,26 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
-import HeroSection from '../../components/Landing/HeroSection';
-import Navbar from '../../components/Navbar';
-import AuthPopup from '../../components/Popup/AuthPopup';
-import Loader from "../../components/Loader"
+import HeroSection from "../../components/Landing/HeroSection";
+import Navbar from "../../components/Navbar";
+import AuthPopup from "../../components/Popup/AuthPopup";
+import Loader from "../../components/Loader";
 
-import './LandingPageStyles.scss';
+import "./LandingPageStyles.scss";
 
 const LandingPage = ({ loading, isAuthenticated, popup }) => {
-  if(loading) {
-    return(
-      <Loader />
-    )
-  } else {
-    return (
-      <div className="landing-page">
-        <Navbar currentPage="LandingPage" />
-        <HeroSection />
-  
-        {/* login/register popup */}
-        {!isAuthenticated &&
-          (popup.activePopup === 'REGISTER' || popup.activePopup === 'LOGIN') && (
-            <AuthPopup type={popup.activePopup} data={popup.data} />
-          )}
-      </div>
-    );
-  }
-  
+  return (
+    <div className="landing-page">
+      <Navbar currentPage="LandingPage" />
+      <HeroSection />
+
+      {/* login/register popup */}
+      {!isAuthenticated &&
+        (popup.activePopup === "REGISTER" || popup.activePopup === "LOGIN") && (
+          <AuthPopup type={popup.activePopup} data={popup.data} />
+        )}
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

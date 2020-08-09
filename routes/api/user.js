@@ -3,7 +3,7 @@ const router = express.Router();
 const { check } = require("express-validator");
 const auth = require("../../middleware/auth");
 const UserController = require("../../Controller/UserController");
-
+const { upload } = require("../../cloudinary/cloudinary");
 //@routes GET api/user/
 //@desc   get current user's info
 //@access private
@@ -30,6 +30,12 @@ router.post(
     ).isLength({ min: 6 }),
   ],
   UserController.create
+);
+router.post(
+  "/addProfileImage",
+  auth,
+  upload.single("profileImage"),
+  UserController.addProfileImage
 );
 
 router.post("/signInWithGoogle", UserController.signInWithGoogle);

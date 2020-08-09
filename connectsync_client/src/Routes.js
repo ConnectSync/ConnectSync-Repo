@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
 import LandingPage from "./pages/LandingPage";
-import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 import { loadUser } from "./redux/action/auth";
 import setAuthToken from "./utils/setAuthToken";

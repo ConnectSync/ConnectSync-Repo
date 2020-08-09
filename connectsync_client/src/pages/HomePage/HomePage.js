@@ -88,7 +88,17 @@ const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,se
         return (
           <>
             <div className="col-lg-3 mb-5 p-0 w-75 mx-lg-0 mx-auto">
-              <Profile />
+              <Profile
+              modalView={modalView}
+              handleChange={handleChange}
+              create={create}
+              join={join}
+              workplace_name={name}
+              workplace_description={description}
+              workplace_type={type}
+              modelRef={modelRef}
+              popupOpenModal={popupOpenModal}
+               />
             </div>
             <div className="col-lg-6 ml-lg-4 px-5">
               <PostTextarea />
@@ -119,7 +129,16 @@ const HomePage = ({isAuthenticated,user,loading,createWorkplace,joinWorkplace,se
                 Join
               </button>
             </div>
-            <WorkplacePopup />
+            <WorkplacePopup
+            modalView={modalView}
+            handleChange={handleChange}
+            create={create}
+            join={join}
+            name={name}
+            description={description}
+            type={type}
+            success={success}
+            modelRef={modelRef} />
           </div>
         )
       }

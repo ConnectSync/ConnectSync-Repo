@@ -5,9 +5,12 @@ import Posts from "../../components/Posts/Posts"
 import PostTextarea from "../../components/Posts/PostTextarea"
 import "./HomePage.scss"
 
+import { connect } from "react-redux";
+
+
 const HomePage = () => {
   return (
-    <div>
+    <div className="public">
       <Navbar currentPage="HomePage" />
       <div className="container">
         <div className="row mt-5 px-4 ">

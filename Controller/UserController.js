@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -142,14 +143,14 @@ exports.addProfileImage = async (req, res) => {
       { _id: req.user.id },
       { $set: { img: result.secure_url } },
       { new: true }
-    ).select("-password -updatedAt -createdAt");
+    ).select('-password -updatedAt -createdAt');
     if (result.secure_url) {
       deleteFile(req.file.filename);
-      console.log("deleting");
+      console.log('deleting');
     }
     return res.json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };

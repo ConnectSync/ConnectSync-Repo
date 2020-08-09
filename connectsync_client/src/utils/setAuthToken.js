@@ -1,13 +1,13 @@
 import api from './api';
 //import axios from 'axios'
-const setAuthToken = token => {
+const setAuthToken = (token) => {
   if (token) {
-    console.log('seting headers')
-    api.defaults.headers.common['jwt-auth-token'] = token;
-    console.log(api.defaults.headers)
+    console.log('seting headers');
+    api.defaults.headers.common['x-auth-token'] = token;
+    console.log(api.defaults.headers);
     localStorage.setItem('token', token);
   } else {
-    delete api.defaults.headers.common['jwt-auth-token'];
+    delete api.defaults.headers.common['x-auth-token'];
     localStorage.removeItem('token');
   }
 };

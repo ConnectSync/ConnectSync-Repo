@@ -1,11 +1,11 @@
-import api from "../../utils/api";
-import axios from "axios";
-import { setError, removeError } from "./error";
-import { GET_USER_BY_ID } from "./types";
+import api from '../../utils/api';
+import axios from 'axios';
+import { setError, removeError } from './error';
+import { GET_USER_BY_ID } from './types';
 
 export const getUserByID = (userId) => async (dispatch) => {
   try {
-    console.log("id==", userId);
+    console.log('id==', userId);
     const res = await api.get(`/user/${userId}`);
     console.log(res.data);
     dispatch({
@@ -20,7 +20,7 @@ export const getUserByID = (userId) => async (dispatch) => {
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach((error) => dispatch(setError(error.msg, "danger")));
+        errors.forEach((error) => dispatch(setError(error.msg, 'danger')));
       }
     }
   }
@@ -28,16 +28,16 @@ export const getUserByID = (userId) => async (dispatch) => {
 
 export const addProfileImage = (postData) => async (dispatch) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     const config = {
       headers: {
-        "content-type": "multipart/form-data",
-        "jwt-auth-token": token,
+        'content-type': 'multipart/form-data',
+        'x-auth-token': token,
       },
     };
 
     const res = await axios.post(
-      "http://localhost:5000/api/user/addProfileImage",
+      'http://localhost:5000/api/user/addProfileImage',
       postData,
       config
     );
@@ -51,7 +51,7 @@ export const addProfileImage = (postData) => async (dispatch) => {
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach((error) => dispatch(setError(error.msg, "danger")));
+        errors.forEach((error) => dispatch(setError(error.msg, 'danger')));
       }
     }
   }

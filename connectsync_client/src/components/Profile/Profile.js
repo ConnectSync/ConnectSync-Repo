@@ -143,7 +143,7 @@ const Profile = ({
                 </button>
             </div>
       )}
-      {/* <WorkPlacePopup
+      <WorkPlacePopup
       style={{
         position: 'absolute',
         zIndex: 100,
@@ -160,7 +160,7 @@ const Profile = ({
         description={workplace_description}
         type={workplace_type}
         modelRef={modelRef}
-       /> */}
+       />
 
     </div>
     )

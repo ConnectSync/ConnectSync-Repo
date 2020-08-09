@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import "./PostStyles.css"
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import {getPostByID} from "../../redux/action/posts"
+import {getPostByID,addLike} from "../../redux/action/posts"
 
 
 

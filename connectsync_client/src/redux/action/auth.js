@@ -1,6 +1,6 @@
-import api from '../../utils/api';
+import api from "../../utils/api";
 //import axios from 'axios'
-import { setError, removeError } from './error';
+import { setError, removeError } from "./error";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -10,8 +10,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SIGNIN_WITH_GOOGLE,
-} from './types';
-import setAuthToken from '../../utils/setAuthToken';
+} from "./types";
+import setAuthToken from "../../utils/setAuthToken";
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -20,7 +20,7 @@ export const loadUser = () => async (dispatch) => {
   }
 
   try {
-    const res = await api.get('/user/');
+    const res = await api.get("/user/");
 
     dispatch({
       type: USER_LOADED,
@@ -29,14 +29,14 @@ export const loadUser = () => async (dispatch) => {
 
     console.log(res.data);
   } catch (err) {
-    dispatch(setError('No Token Found', 'danger'));
+    dispatch(setError("No Token Found", "danger"));
   }
 };
 
 // Register User
 export const register = (authData) => async (dispatch) => {
   try {
-    const res = await api.post('/user/register', authData);
+    const res = await api.post("/user/register", authData);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -52,7 +52,7 @@ export const register = (authData) => async (dispatch) => {
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach((error) => dispatch(setError(error.msg, 'danger')));
+        errors.forEach((error) => dispatch(setError(error.msg, "danger")));
       }
     }
 
@@ -64,11 +64,11 @@ export const register = (authData) => async (dispatch) => {
 
 //Sign in with google:
 export const signInWithGoogle = (authData) => async (dispatch) => {
-  console.log('hello....');
-  console.log('data =', authData);
+  console.log("hello....");
+  console.log("data =", authData);
 
   try {
-    const res = await api.post('/user/signInWithGoogle', authData);
+    const res = await api.post("/user/signInWithGoogle", authData);
 
     dispatch({
       type: SIGNIN_WITH_GOOGLE,
@@ -83,19 +83,15 @@ export const signInWithGoogle = (authData) => async (dispatch) => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(setError(error.msg, 'danger')));
+      errors.forEach((error) => dispatch(setError(error.msg, "danger")));
     }
-
-    dispatch({
-      type: AUTH_ERROR,
-    });
   }
 };
 
 // Login User
 export const login = (authData) => async (dispatch) => {
   try {
-    const res = await api.post('/auth/login', authData);
+    const res = await api.post("/auth/login", authData);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -110,7 +106,7 @@ export const login = (authData) => async (dispatch) => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(setError(error.msg, 'danger')));
+      errors.forEach((error) => dispatch(setError(error.msg, "danger")));
     }
 
     dispatch({

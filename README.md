@@ -48,6 +48,26 @@ ConnectSync is a social networking site made for co-workers to connect with each
 
 The project was created using MERN stack. We used **MongoDB**(MongoDB Atlas) as our database, **Auth0**(JWT & OAuth) for the authentication, and deployed the application to **AWS**.
 
+### Landing page
+
+![landing](https://res.cloudinary.com/dmn19/image/upload/v1597032386/Screenshot_148.png)
+
+### Create Account
+
+![account](https://res.cloudinary.com/dmn19/image/upload/v1597032385/Screenshot_147.png)
+
+### Home page
+
+![Home](https://res.cloudinary.com/dmn19/image/upload/v1597032384/Screenshot_149.png)
+
+### User profile page
+
+![profile](https://res.cloudinary.com/dmn19/image/upload/v1597032385/Screenshot_153.png)
+
+### Search members
+
+![members](https://res.cloudinary.com/dmn19/image/upload/v1597032384/Screenshot_150.png)
+
 ### Here is a list of features that we are providing:
 
 1. User can register either by their email address or with their google account.

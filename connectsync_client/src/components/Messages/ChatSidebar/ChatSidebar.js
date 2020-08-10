@@ -8,8 +8,12 @@ import './ChatSidebarStyles.css';
 
 const ChatSidebar = ({ auth, setChatWorkplace, chat, setWorkplace }) => {
   useEffect(() => {
-    auth.user && setChatWorkplace(auth.user.workplaces[0].workplace._id);
-    auth.user && setWorkplace(auth.user.workplaces[0].workplace._id);
+    auth.user &&
+      auth.user.workplaces.length > 0 &&
+      setChatWorkplace(auth.user.workplaces[0].workplace._id);
+    auth.user &&
+      auth.user.workplaces.length > 0 &&
+      setWorkplace(auth.user.workplaces[0].workplace._id);
   }, [auth]);
 
   const clickHandler = (id) => {

@@ -98,8 +98,8 @@ const HomePage = ({
         );
       } else {
         return (
-          <div className="d-flex flex-column align-items-center justify-content-center col-lg-6 px-5">
-            <div>
+          <div className="mt-5 all-center flex-column col-lg-6 px-5 w-100">
+            <div className="mt-5">
               <h3 className="text-center mb-5">
                 You do not have any Workplace setup, Create or Join a Workplace
                 to continue
@@ -149,7 +149,7 @@ const HomePage = ({
         <div className="public">
           <Navbar currentPage="HomePage" />
           <div className="container">
-            <div className="row mt-5 px-4 no-workplace-render">
+            <div className="row mt-5 px-4 no-workplace-render all-center">
               {conditionalRender()}
             </div>
           </div>

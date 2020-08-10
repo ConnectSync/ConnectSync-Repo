@@ -4,11 +4,8 @@ An open source virtual working environment for professional institutions and org
 
 ## Website
 
-[ConnectSync](https://connectsync.com)
+[ConnectSync](https://connectsync.herokuapp.com/)
 
-## Github Repo
-
-[https://github.com/dhanmoni/ConnectSync-Repo](https://github.com/dhanmoni/ConnectSync-Repo)
 
 ## Installation
 
@@ -28,7 +25,7 @@ To spin up the server, run:
 ```
 
 Create a folder named 'config' and a json file inside it as 'default.json'.
-put the mongoURI inside the file.
+put the mongoURI and cloudinary keys inside the file.
 
 To run the frontend on localhost, go to the directory <mark>connectsync_client</mark> and run:
 
@@ -46,7 +43,7 @@ To run client side and server side concurrently:
 
 ConnectSync is a social networking site made for co-workers to connect with each other more personally. With the help of this amazing application, users can create or join workplaces, post content to a specific or more than one workplace, chat with other members of the workplaces, like & comment on contents, all the things that will help users connect together. We have added a ton of features to make users' life easier while keeping simplicity in mind. Our one of the main motive was to create a simple and user-friendly social media app that users will be able to use in seconds without having to go through some unnecessary process.
 
-The project was created using MERN stack. We used **MongoDB**(MongoDB Atlas) as our database, **Auth0**(JWT & OAuth) for the authentication, and deployed the application to **AWS**.
+The project was created using MERN stack. We used **MongoDB**(MongoDB Atlas) as our database, **Auth0**(JWT & OAuth) for the authentication, and deployed the application to **Heroku**(due to lack of time).
 
 ### Landing page
 
@@ -59,6 +56,10 @@ The project was created using MERN stack. We used **MongoDB**(MongoDB Atlas) as 
 ### Home page
 
 ![Home](https://res.cloudinary.com/dmn19/image/upload/v1597032384/Screenshot_149.png)
+
+### Chat tab
+
+![Chat](https://res.cloudinary.com/dmn19/image/upload/v1597072376/Screenshot_161.png)
 
 ### User profile page
 

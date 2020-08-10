@@ -1,17 +1,17 @@
-const { validationResult } = require("express-validator");
-const Workplace = require("../models/Workplace");
-const User = require("../models/User");
+const { validationResult } = require('express-validator');
+const Workplace = require('../models/Workplace');
+const User = require('../models/User');
 
 // @desc get all workplaces
 exports.index = async (req, res) => {
   try {
-    const workplaces = await Workplace.find({ type: "PUBLIC" }).select(
-      "name description img"
+    const workplaces = await Workplace.find({ type: 'PUBLIC' }).select(
+      'name description img'
     );
 
     return res.json(workplaces);
   } catch (err) {
-    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -20,20 +20,20 @@ exports.myworkplace = async (req, res) => {
   try {
     const workplaces = await Workplace.findOne({
       _id: req.params.workplaceId.trim(),
-      "members.user": req.user.id,
+      'members.user': req.user.id,
     })
-      .populate("members.user", "name -_id")
-      .select("name description img members.user");
+      .populate('members.user', 'name -_id')
+      .select('name description img members.user');
 
     if (!workplaces) {
       return res
         .status(500)
-        .json({ errors: [{ msg: "Only members can see this workplace" }] });
+        .json({ errors: [{ msg: 'Only members can see this workplace' }] });
     }
 
     return res.json(workplaces);
   } catch (err) {
-    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -42,15 +42,29 @@ exports.getPublicWorkplace = async (req, res) => {
   try {
     const workplaces = await Workplace.findOne({
       name: req.params.workplaceName.trim().toLowerCase(),
-      type: "PUBLIC",
+      type: 'PUBLIC',
     })
-      .populate("members.user", "name -_id")
-      .select("name description img members.user");
+      .populate('members.user', 'name -_id')
+      .select('name description img members.user');
 
     return res.json(workplaces);
   } catch (err) {
     console.error(err.message);
-    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
+  }
+};
+
+exports.getAllWorkplaceMember = async (req, res) => {
+  try {
+    const userWorkplaces = JSON.parse(req.query.workplaces);
+    const users = await Workplace.find({
+      name: userWorkplaces,
+    })
+      .select('members.user')
+      .populate('members.user', 'name img');
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -70,7 +84,7 @@ exports.create = async (req, res) => {
     if (workplace) {
       return res
         .status(400)
-        .json({ errors: [{ msg: "This workplace already exists." }] });
+        .json({ errors: [{ msg: 'This workplace already exists.' }] });
     }
 
     const { name, description, type } = req.body;
@@ -83,7 +97,7 @@ exports.create = async (req, res) => {
       members: [
         {
           user: req.user.id,
-          role: "ADMIN",
+          role: 'ADMIN',
           by: req.user.id,
         },
       ],
@@ -99,7 +113,7 @@ exports.create = async (req, res) => {
 
     return res.json(newWorkplace); // return the workplace details
   } catch (error) {
-    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -109,18 +123,18 @@ exports.delete = async (req, res) => {
     const workplace = await Workplace.findById(req.params.workplaceId);
 
     if (!workplace) {
-      return res.status(404).json({ msg: "workplace not found" });
+      return res.status(404).json({ msg: 'workplace not found' });
     }
 
     //Check if the user is an admin or not
     if (
       !workplace.members.find(
         (member) =>
-          member.user.toString() == req.user.id || member.role === "ADMIN"
+          member.user.toString() == req.user.id || member.role === 'ADMIN'
       )
     ) {
       return res.status(401).json({
-        msg: "You are not authorized to delete a workplace",
+        msg: 'You are not authorized to delete a workplace',
       });
     }
     //remove the workplace if the request was coming from an admin
@@ -131,9 +145,9 @@ exports.delete = async (req, res) => {
       { $pull: { workplaces: { workplace: workplace._id } } }
     );
 
-    return res.json({ msg: "workplace removed" });
+    return res.json({ msg: 'workplace removed' });
   } catch (error) {
-    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -151,18 +165,18 @@ exports.updateDetails = async (req, res) => {
     const workplace = await Workplace.findById(req.params.workplaceId);
 
     if (!workplace) {
-      return res.status(404).json({ msg: "workplace not found" });
+      return res.status(404).json({ msg: 'workplace not found' });
     }
 
     //Check if the user is an admin or not
     if (
       !workplace.members.find(
         (member) =>
-          member.user.toString() == req.user.id || member.role === "ADMIN"
+          member.user.toString() == req.user.id || member.role === 'ADMIN'
       )
     ) {
       return res.status(401).json({
-        msg: "You are not authorized to update a workplace",
+        msg: 'You are not authorized to update a workplace',
       });
     }
 
@@ -176,7 +190,7 @@ exports.updateDetails = async (req, res) => {
 
     return res.json({ workplace });
   } catch (error) {
-    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -186,13 +200,13 @@ exports.joinWorkplace = async (req, res) => {
     //user a member of the workplace
     const workplace = await Workplace.findOne({
       _id: req.params.workplaceId,
-      type: "PUBLIC",
-    }).select("members");
+      type: 'PUBLIC',
+    }).select('members');
 
     if (!workplace) {
       return res
         .status(404)
-        .json({ errors: [{ msg: "This workplace does not exists." }] });
+        .json({ errors: [{ msg: 'This workplace does not exists.' }] });
     }
 
     //check if the user already a member a not
@@ -201,7 +215,7 @@ exports.joinWorkplace = async (req, res) => {
     ) {
       return res
         .status(400)
-        .json({ errors: [{ msg: "You are already a member" }] });
+        .json({ errors: [{ msg: 'You are already a member' }] });
     }
 
     //if user is not already a member then push user to the member array.
@@ -216,7 +230,7 @@ exports.joinWorkplace = async (req, res) => {
       { _id: req.user.id },
       {
         $push: {
-          workplaces: { workplace: data._id, status: "JOINED" },
+          workplaces: { workplace: data._id, status: 'JOINED' },
         },
       }
     );
@@ -224,6 +238,6 @@ exports.joinWorkplace = async (req, res) => {
     return res.json(data);
   } catch (error) {
     console.error(error.message);
-    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };

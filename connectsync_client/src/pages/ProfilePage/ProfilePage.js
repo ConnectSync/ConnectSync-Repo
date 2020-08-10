@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { connect } from "react-redux";
 import { loadUser } from "../../redux/action/auth";
 import {

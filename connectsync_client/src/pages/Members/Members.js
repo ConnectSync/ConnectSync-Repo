@@ -21,6 +21,7 @@ const Members = (props) => {
   }, [workplaces.loading, user]);
   useEffect(() => {
     if (workplaceNames.length > 0) {
+      console.log("members=", activeWorkplaceNames);
       getAllWorkplacesMembers(activeWorkplaceNames.name);
     }
   }, [activeWorkplaceNames]);

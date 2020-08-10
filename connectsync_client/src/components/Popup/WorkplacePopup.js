@@ -46,7 +46,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
       console.log(publicWorkplaces);
 
       return (
-        <PopupContainer title="Create/Join a workplace">
+        <PopupContainer>
           <div>
             <div className="text-center">
               {type === "CREATE" ? (

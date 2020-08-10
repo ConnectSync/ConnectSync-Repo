@@ -21,10 +21,10 @@ const HomeNavs = ({ auth, logout }) => {
   const [navStatus, setNavStatus] = useState("collapse navbar-collapse");
 
   //navbar handler
-  const navbarHandler = () => {
-    setNavbarOpen(!navbarOpen);
-    setNavStatus(`collapse navbar-collapse ${navbarOpen ? "" : "show"}`);
-  };
+  // const navbarHandler = () => {
+  //   setNavbarOpen(!navbarOpen);
+  //   setNavStatus(`collapse navbar-collapse ${navbarOpen ? "" : "show"}`);
+  // };
 
   const userProps = { ...auth.user };
 
@@ -46,9 +46,8 @@ const HomeNavs = ({ auth, logout }) => {
     //         <li className="nav-item px-2">
     //               <div className="nav-link text-white">
     //                 <Link to="/home" className="text-white">
-    //                   <i className="fa fa-home fa-1.5x" aria-hidden="true">
+    //                   <i className="fa fa-home mr1" aria-hidden="true"/>
     //                     {" "}
-    //                     Home
     //                   </i>
     //                 </Link>
     //               </div>
@@ -56,9 +55,8 @@ const HomeNavs = ({ auth, logout }) => {
     //         <li className="nav-item px-2">
     //           <div className="nav-link text-white">
     //             <Link to="/members" className="text-white">
-    //               <i className="fa fa-users fa-1.5x" aria-hidden="true">
+    //               <i className="fa fa-users mr1" aria-hidden="true"/>
     //                 {" "}
-    //                 Members
     //               </i>
     //             </Link>
     //           </div>
@@ -66,9 +64,8 @@ const HomeNavs = ({ auth, logout }) => {
     //         <li className="nav-item px-2">
     //           <div className="nav-link text-white">
     //             <Link to="/messages" className="text-white">
-    //               <i className="fa fa-comments fa-1.5x" aria-hidden="true">
+    //               <i className="fa fa-comments mr1" aria-hidden="true"/>
     //                 {" "}
-    //                 Chats
     //               </i>
     //             </Link>
     //           </div>
@@ -77,9 +74,8 @@ const HomeNavs = ({ auth, logout }) => {
     //         <li className="nav-item px-2">
     //           <div className="nav-link text-white">
     //             <Link to="/profile" className="text-white">
-    //               <i className="fa fa-user fa-1.5x" aria-hidden="true">
+    //               <i className="fa fa-user mr1" aria-hidden="true"/>
     //                 {" "}
-    //                 Profile
     //               </i>
     //             </Link>
     //           </div>
@@ -118,28 +114,44 @@ const HomeNavs = ({ auth, logout }) => {
     <ul className="navbar-nav ml-auto">
       <li className="nav-item px-1">
         <Link to="/home" className="nav-link text-white">
-        <i className="fa fa-home fa-1.5x" aria-hidden="true">Home</i>
-          
+          <i className="fa fa-home mr-1" aria-hidden="true" />
+          Home
         </Link>
       </li>
       <li className="nav-item px-1">
         <Link to="/members" className="nav-link text-white">
-        <i className="fa fa-users fa-1.5x " aria-hidden="true">Members</i>
-          
+          <i className="fa fa-users mr-1" aria-hidden="true" />
+          Members
         </Link>
       </li>
       <li className="nav-item px-1">
         <Link to="/chats" className="nav-link text-white">
-        <i className="fa fa-comments fa-1.5x" aria-hidden="true">Chats</i>
-          
+          <i className="fa fa-comments mr-1" aria-hidden="true" />
+          Chats
         </Link>
       </li>
-      <li className="nav-item px-1">
-        <Link to="/profile" className="nav-link text-white">
-        <i className="fa fa-user fa-1.5x" aria-hidden="true">Profile</i>
-        
-        </Link>
-      </li>
+
+      <div className="dropdown show">
+        <li
+          className="nav-item px-2 profile-link"
+          role="button"
+          onClick={dropdownHandler}
+        >
+          <div className="nav-link text-white">
+            <i className="fa fa-user mr-1" aria-hidden="true" />
+            <i className="fa fa-angle-down" aria-hidden="true" />
+          </div>
+        </li>
+        <div className={dropdownStatus}>
+          <Link className="dropdown-item" to="/profile">
+            Profile
+          </Link>
+
+          <span className="dropdown-item" onClick={() => logout()}>
+            Logout
+          </span>
+        </div>
+      </div>
     </ul>
   );
 };

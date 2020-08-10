@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PopupContainer from "./PopupContainer";
 import { connect } from "react-redux";
 import { getAllPublicWorkplaces } from "../../redux/action/workplaces";
+import { openChangePopup } from "../../redux/action/popup";
 
 const mapStateToProps = (state) => ({
   workplaceProps: state.workplaces,
+  popup: state.popup,
 });
 
 export default connect(mapStateToProps, { getAllPublicWorkplaces })(
@@ -12,23 +14,27 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
     create,
     join,
     handleChange,
-    modalView,
     name,
     description,
     type,
-    modelRef,
+    workplace_type,
     workplaceProps,
+    getAllPublicWorkplaces,
   }) {
+    useEffect(() => {
+      getAllPublicWorkplaces();
+    }, []);
     const {
       loading: workplaceLoading,
       all_public_workplaces: publicWorkplaces,
     } = workplaceProps;
+    console.log("type=", type);
 
     if (workplaceLoading) {
       return (
-        <PopupContainer ref={modelRef}>
+        <PopupContainer>
           <div className="text-center">
-            {modalView === "create" ? (
+            {type === "CREATE" ? (
               <h3>Initializing 'Create Workplace'...</h3>
             ) : (
               <h3>Initializing 'Join Workplace'...</h3>
@@ -40,10 +46,10 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
       console.log(publicWorkplaces);
 
       return (
-        <PopupContainer ref={modelRef}>
+        <PopupContainer title="Create/Join a workplace">
           <div>
             <div className="text-center">
-              {modalView === "create" ? (
+              {type === "CREATE" ? (
                 <h3>Create Workplace</h3>
               ) : (
                 <h3>Join Workplace</h3>
@@ -72,7 +78,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
                   ))}
                 </datalist>
               </div>
-              {modalView === "create" && (
+              {type === "CREATE" && (
                 <React.Fragment>
                   <div className="form-group">
                     <label htmlFor="description">Description</label>
@@ -92,7 +98,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
                       onChange={handleChange("type")}
                       className="custom-select"
                       id="type"
-                      value={type}
+                      value={workplace_type}
                       required
                     >
                       <option selected disabled value="">
@@ -106,7 +112,7 @@ export default connect(mapStateToProps, { getAllPublicWorkplaces })(
               )}
 
               <div className="text-center">
-                {modalView === "create" ? (
+                {type === "CREATE" ? (
                   <button
                     onClick={create}
                     className="btn-style text-center mt-3 px-5 btn btn-primary bg-primary"

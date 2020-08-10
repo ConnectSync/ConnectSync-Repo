@@ -3,7 +3,7 @@ import { GET_USER_BY_ID } from "../action/types";
 //i guess another property -> isLoggedIn should be added which is initially false
 const initialState = {
   loading: true,
-  user: null,
+  user: {},
 };
 
 export default function (state = initialState, action) {

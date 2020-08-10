@@ -1,24 +1,23 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+const path = require('path');
 
-const user = require("./routes/api/user");
-const post = require("./routes/api/post");
-const workplace = require("./routes/api/workplace");
-const auth = require("./routes/api/auth");
-
-router.get("/", (req, res) => {
-  res.json({ msg: "Hello World" });
-});
+const user = require('./routes/api/user');
+const post = require('./routes/api/post');
+const workplace = require('./routes/api/workplace');
+const auth = require('./routes/api/auth');
 
 //use routes
-router.use("/api/post", post);
-router.use("/api/user", user);
-router.use("/api/auth", auth);
-router.use("/api/workplace", workplace);
+router.use('/api/post', post);
+router.use('/api/user', user);
+router.use('/api/auth', auth);
+router.use('/api/workplace', workplace);
 
-// for 404
-router.use((req, res, next) => {
-  res.status(404).send("<h2 align=center>Page Not Found!</h2>");
-});
+if (process.env.NODE_ENV == 'production') {
+  app.use(express.static('connectsync_client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 module.exports = router;

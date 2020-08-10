@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 const http = require('http');
@@ -42,7 +41,6 @@ const app = express();
 //body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'connectsync_client', 'build')));
 // setting up cors, headers
 
 let allowCrossDomain = function (req, res, next) {
@@ -132,9 +130,7 @@ io.on('connect', (socket) => {
 
 // port
 const port = process.env.PORT || 5000;
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+
 server.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });

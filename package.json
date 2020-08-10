@@ -8,7 +8,8 @@
     "start": "node server.js",
     "client": "npm run start --prefix connectsync_client",
     "server": "nodemon server.js",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix connectsync_client && npm run build --prefix connectsync_client"
   },
   "author": "",
   "license": "MIT",

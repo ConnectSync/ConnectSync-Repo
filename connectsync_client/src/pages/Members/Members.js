@@ -78,7 +78,7 @@ const Members = (props) => {
         <div className="mainMemberSection">
           <div className="workplaceDiv">
             <h5>Workplaces:</h5>
-            {workplaceNamesArray.length > 1 ? (
+            {workplaceNamesArray.length > 0 ? (
               renderWorkplaceList
             ) : (
               <p>No Workplace</p>

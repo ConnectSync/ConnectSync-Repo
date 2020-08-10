@@ -1,8 +1,6 @@
 # ConnectSync
 
-## We bring remote workers closer together
-
-Enjoy one of the best open source social media platforms for business owners to reunite their workers from anywhere.
+An open source virtual working environment for professional institutions and organization to remotely connect their teams and employees across different countries.
 
 ## Website
 
@@ -14,10 +12,10 @@ Enjoy one of the best open source social media platforms for business owners to 
 
 ## Installation
 
-Clone the repo and run :
+Clone the repo and install the dependencies:
 
 ```bash
-npm install
+npm i && cd connectsync_client && npm i && cd ..
 ```
 
 It will install the required dependencies.
@@ -32,13 +30,13 @@ To spin up the server, run:
 Create a folder named 'config' and a json file inside it as 'default.json'.
 put the mongoURI inside the file.
 
-To run the frontend on localhost, go to the directory '/connectsync' and run:
+To run the frontend on localhost, go to the directory <mark>connectsync_client</mark> and run:
 
 ```bash
 > npm start
 ```
 
-To run frontend and server together
+To run client side and server side concurrently:
 
 ```bash
 > npm run dev

@@ -21,6 +21,7 @@
     "redux-thunk": "^2.3.0",
     "sass-loader": "^9.0.3",
     "socket.io-client": "^2.3.0",
+    "react-scroll-to-bottom": "^3.0.0",
     "uuid": "^8.3.0"
   },
   "scripts": {

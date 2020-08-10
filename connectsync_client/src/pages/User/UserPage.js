@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../components/Public/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { connect } from "react-redux";
 import { getUserByID } from "../../redux/action/user";
 import "../ProfilePage/ProfilePageStyles.scss";
@@ -22,9 +22,9 @@ export default connect(mapStateToProps, {
   const { user } = member;
   const isLoading = member.loading;
 
-  if (typeof user.profile == "undefined") {
-    user.profile = {};
-  }
+  // if (typeof user.profile == "undefined") {
+  //   user.profile = {};
+  // }
 
   if (isLoading) {
     return <h1>Loading...</h1>;

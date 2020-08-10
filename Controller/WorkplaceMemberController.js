@@ -1,19 +1,20 @@
-const { validationResult } = require('express-validator');
-const Workplace = require('../models/Workplace');
-const User = require('../models/User');
+const { validationResult } = require("express-validator");
+const Workplace = require("../models/Workplace");
+const User = require("../models/User");
 
 exports.getAllWorkplaceMember = async (req, res) => {
+  console.log("hello", req.query);
   try {
     const userWorkplaces = JSON.parse(req.query.workplaces);
     const users = await Workplace.find({
       name: userWorkplaces,
     })
-      .select('members.user')
-      .populate('members.user', 'name img _id');
+      .select("members.user")
+      .populate("members.user", "name img");
     res.json(users);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
+    console.error("msg", err.message);
+    res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
 
@@ -22,14 +23,14 @@ exports.addMember = async (req, res) => {
   try {
     const workplace = await Workplace.findOne({
       _id: req.params.workplaceId,
-    }).select('members');
+    }).select("members");
 
     //check if workplace exists
 
     if (!workplace) {
       return res
         .status(404)
-        .json({ errors: [{ msg: 'This workplace does not exists!' }] });
+        .json({ errors: [{ msg: "This workplace does not exists!" }] });
     }
 
     const getUser = await User.findOne({
@@ -38,7 +39,7 @@ exports.addMember = async (req, res) => {
 
     if (!getUser) {
       return res.status(404).json({
-        errors: [{ msg: 'no account associated with this email id!' }],
+        errors: [{ msg: "no account associated with this email id!" }],
       });
     }
 
@@ -48,29 +49,29 @@ exports.addMember = async (req, res) => {
     ) {
       return res
         .status(400)
-        .json({ errors: [{ msg: 'member already exist in the workplace!' }] });
+        .json({ errors: [{ msg: "member already exist in the workplace!" }] });
     }
 
     //check if the requesting user admin or not
     if (
       !workplace.members.find(
         (member) =>
-          member.user.toString() == req.user.id && member.role == 'ADMIN'
+          member.user.toString() == req.user.id && member.role == "ADMIN"
       )
     ) {
       return res.status(400).json({
-        errors: [{ msg: 'Only admins can add other members to workplace!' }],
+        errors: [{ msg: "Only admins can add other members to workplace!" }],
       });
     }
 
     workplace.members.push({
       user: getUser._id,
-      status: 'PENDING',
+      status: "PENDING",
     });
 
     getUser.workplaces.push({
       workplace: workplace._id,
-      status: 'REQUESTED',
+      status: "REQUESTED",
     });
 
     const data = await workplace.save();
@@ -80,7 +81,7 @@ exports.addMember = async (req, res) => {
     return res.json(data);
   } catch (error) {
     console.error(error.message);
-    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
+    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
 
@@ -89,14 +90,14 @@ exports.removeMember = async (req, res) => {
   try {
     const workplace = await Workplace.findOne({
       _id: req.params.workplaceId,
-    }).select('members');
+    }).select("members");
 
     //check if workplace exists
 
     if (!workplace) {
       return res
         .status(404)
-        .json({ errors: [{ msg: 'This workplace does not exists!' }] });
+        .json({ errors: [{ msg: "This workplace does not exists!" }] });
     }
 
     // member already exist or not
@@ -105,25 +106,25 @@ exports.removeMember = async (req, res) => {
         (member) => member.user.toString() == req.params.userId
       )
     ) {
-      return res.status(400).json({ errors: [{ msg: 'member not found!' }] });
+      return res.status(400).json({ errors: [{ msg: "member not found!" }] });
     }
 
     //check if the requesting user admin or not
     if (
       !workplace.members.find(
         (member) =>
-          member.user.toString() == req.user.id && member.role == 'ADMIN'
+          member.user.toString() == req.user.id && member.role == "ADMIN"
       )
     ) {
       return res.status(400).json({
-        errors: [{ msg: 'Only admins can remove other members!' }],
+        errors: [{ msg: "Only admins can remove other members!" }],
       });
     }
 
     //check if the requesting user admin or not
     if (req.user.id == req.params.userId) {
       return res.status(400).json({
-        errors: [{ msg: 'not allowed' }],
+        errors: [{ msg: "not allowed" }],
       });
     }
 
@@ -137,10 +138,10 @@ exports.removeMember = async (req, res) => {
     const data = await workplace.save();
 
     await User.updateOne(
-      { _id: req.params.userId, 'workplaces.workplace': data._id },
+      { _id: req.params.userId, "workplaces.workplace": data._id },
       {
         $set: {
-          'workplaces.$.status': 'REMOVED',
+          "workplaces.$.status": "REMOVED",
         },
       }
     );
@@ -148,6 +149,6 @@ exports.removeMember = async (req, res) => {
     return res.json(data);
   } catch (error) {
     console.error(error.message);
-    return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
+    return res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };

@@ -43,7 +43,7 @@ To run client side and server side concurrently:
 
 ConnectSync is a social networking site made for co-workers to connect with each other more personally. With the help of this amazing application, users can create or join workplaces, post content to a specific or more than one workplace, chat with other members of the workplaces, like & comment on contents, all the things that will help users connect together. We have added a ton of features to make users' life easier while keeping simplicity in mind. Our one of the main motive was to create a simple and user-friendly social media app that users will be able to use in seconds without having to go through some unnecessary process.
 
-The project was created using MERN stack. We used **MongoDB**(MongoDB Atlas) as our database, **Auth0**(JWT & OAuth) for the authentication, and deployed the application to **Heroku**(due to lack of time).
+The project was created using MERN stack. We used **MongoDB**(MongoDB Atlas) as our database, **Auth0**(JWT & OAuth) for the authentication, and deployed the application to **Heroku**.
 
 ### Landing page
 

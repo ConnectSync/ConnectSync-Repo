@@ -18,7 +18,6 @@ function CommentPage(props) {
 
   useEffect(() => {
     if (props.match.params.postId) {
-      console.log("id=", props.match.params.postId);
       getPostByID(props.match.params.postId);
       setTimeout(() => {
         if (typeof post != "undefined") {

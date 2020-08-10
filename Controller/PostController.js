@@ -14,14 +14,12 @@ exports.index = async (req, res) => {
       });
     res.json(posts);
   } catch (err) {
-    console.error(err.message);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
 
 exports.addPost = async (req, res) => {
   try {
-    console.log(req.body);
     const workplaces = JSON.parse(req.query.workplaces);
 
     const newPost = new Post({
@@ -50,12 +48,10 @@ exports.addPostWithImage = async (req, res) => {
     const post = await newPost.save();
     if (result.secure_url) {
       deleteFile(req.file.filename);
-      console.log("deleting");
     }
 
     return res.json(post);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
@@ -80,7 +76,6 @@ exports.addLike = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
@@ -108,7 +103,6 @@ exports.unLike = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
@@ -128,7 +122,6 @@ exports.addComment = async (req, res) => {
       return res.status(200).json(post);
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
@@ -161,7 +154,6 @@ exports.removeComment = async (req, res) => {
       }
     }
   } catch (err) {
-    console.error(err.message);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
@@ -177,7 +169,6 @@ exports.getPostByID = async (req, res) => {
     }
     return res.json(post);
   } catch (err) {
-    console.error(err.message);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };

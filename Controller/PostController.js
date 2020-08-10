@@ -10,7 +10,7 @@ exports.index = async (req, res) => {
       .populate("likes.user", "name img")
       .populate("comments.user", "name img")
       .sort({
-        date: -1,
+        createdAt: -1,
       });
     res.json(posts);
   } catch (err) {

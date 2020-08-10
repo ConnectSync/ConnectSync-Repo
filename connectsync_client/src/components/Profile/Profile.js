@@ -124,7 +124,7 @@ const Profile = ({
       {!isEditing && (
         <div className="d-flex flex-column">
           <button
-            onClick={() => openChangePopup("JOIN")}
+            onClick={() => openChangePopup("CREATE")}
             className="px-5 btn-style mt-2 btn btn-primary shadow p-1 mb-2 bg-white rounded"
           >
             Create +
@@ -149,7 +149,6 @@ const Profile = ({
           workplace_type={workplace_type}
         />
       )}
-
     </div>
   );
 };

@@ -42,7 +42,7 @@ const app = express();
 //body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, 'connectsync_client', 'build')));
 // setting up cors, headers
 
 let allowCrossDomain = function (req, res, next) {

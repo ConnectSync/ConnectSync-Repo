@@ -11,15 +11,12 @@ import {
 
 export const createWorkplace = (workplaceData) => async (dispatch) => {
   try {
-    console.log("data=", workplaceData);
     const res = await api.post("/workplace/", workplaceData);
-    console.log("workplace=", res.data);
     dispatch({
       type: CREATE_WORKPLACE,
     });
     dispatch(loadUser());
   } catch (err) {
-    console.log(err);
     dispatch(removeError());
     if (err.response) {
       const errors = err.response.data.errors;
@@ -33,12 +30,9 @@ export const createWorkplace = (workplaceData) => async (dispatch) => {
 
 export const joinWorkplace = (name) => async (dispatch) => {
   try {
-    console.log(name);
     const workplaceId = await api.get(`/workplace/public/${name}`);
-    console.log("id==", workplaceId);
 
     const res = await api.post(`/workplace/${workplaceId.data._id}/join`);
-    console.log("workplace=", res.data);
     dispatch({
       type: JOIN_WORKPLACE,
     });
@@ -46,7 +40,6 @@ export const joinWorkplace = (name) => async (dispatch) => {
     //dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -59,9 +52,7 @@ export const joinWorkplace = (name) => async (dispatch) => {
 
 export const getAllPublicWorkplaces = () => async (dispatch) => {
   try {
-    console.log("i here");
     const res = await api.get("/workplace/");
-    console.log("workplaces=", res.data);
     dispatch({
       type: GET_ALL_PUBLIC_WORKPLACES,
       payload: res.data,
@@ -69,8 +60,6 @@ export const getAllPublicWorkplaces = () => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log("workplace retrieve error");
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -84,10 +73,8 @@ export const getAllPublicWorkplaces = () => async (dispatch) => {
 export const getAllWorkplacesMembers = (workplaceData) => async (dispatch) => {
   try {
     const data = JSON.stringify(workplaceData);
-    console.log("req=", data);
     const res = await api.get(`/workplace/allMembers?workplaces=${data}`);
     const memberData = [];
-    console.log("res==", res);
     res.data.forEach((memberObj) => {
       memberObj.members.forEach((obj) => {
         memberData.push(obj);
@@ -101,7 +88,6 @@ export const getAllWorkplacesMembers = (workplaceData) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -121,7 +107,6 @@ export const setActiveWorkplaces = (workplaceData) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     dispatch(setError("Something went wrong!", "danger"));
   }
 };

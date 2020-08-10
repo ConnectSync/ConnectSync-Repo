@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import { connect } from "react-redux";
 import { getUserByID } from "../../redux/action/user";
@@ -19,13 +19,25 @@ export default connect(mapStateToProps, {
   }, []);
 
   const { getUserByID, member } = props;
-  const { user } = member;
+  let { user } = member;
   const isLoading = member.loading;
 
-  // if (typeof user.profile == "undefined") {
-  //   user.profile = {};
+  // if (user == null || undefined) {
+  //   console.log("hello", user);
+  //   user = {
+  //     profile: {
+  //       bio: "",
+  //       residence: "",
+  //     },
+  //   };
   // }
-
+  if (typeof user.profile === "undefined") {
+    user.profile = {
+      bio: "",
+      residence: "",
+      social: {},
+    };
+  }
   if (isLoading) {
     return <h1>Loading...</h1>;
   }

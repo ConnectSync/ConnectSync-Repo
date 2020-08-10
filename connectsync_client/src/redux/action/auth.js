@@ -5,7 +5,6 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
-  AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
@@ -26,8 +25,6 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
-
-    console.log(res.data);
   } catch (err) {
     dispatch(setError("No Token Found", "danger"));
   }
@@ -47,7 +44,6 @@ export const register = (authData) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -64,9 +60,6 @@ export const register = (authData) => async (dispatch) => {
 
 //Sign in with google:
 export const signInWithGoogle = (authData) => async (dispatch) => {
-  console.log("hello....");
-  console.log("data =", authData);
-
   try {
     const res = await api.post("/user/signInWithGoogle", authData);
 

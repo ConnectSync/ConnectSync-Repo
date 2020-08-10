@@ -4,7 +4,6 @@ body {
   background: #7858f828;
 }
 
-
 .profile-avatar {
   margin-bottom: -50px;
   z-index: 2;
@@ -52,6 +51,7 @@ body {
   i {
     cursor: pointer;
     transition: all ease 0.5s;
+
   }
   i:hover {
     transform: scale(1.7);

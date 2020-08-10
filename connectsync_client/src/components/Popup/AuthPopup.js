@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import GoogleLogin from 'react-google-login';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import React, { useState } from "react";
+import GoogleLogin from "react-google-login";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-import PopupContainer from './PopupContainer';
-import { setError } from '../../redux/action/error';
-import { register, signInWithGoogle, login } from '../../redux/action/auth';
-import { openChangePopup } from '../../redux/action/popup';
+import PopupContainer from "./PopupContainer";
+import { setError } from "../../redux/action/error";
+import { register, signInWithGoogle, login } from "../../redux/action/auth";
+import { openChangePopup } from "../../redux/action/popup";
 
 const AuthPop = (props) => {
   const {
     setError,
     register,
-    isAuthenticated,
     signInWithGoogle,
     login,
     type,
@@ -23,9 +22,9 @@ const AuthPop = (props) => {
   } = props;
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -38,19 +37,19 @@ const AuthPop = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    type === 'REGISTER' ? registerUser() : loginUser();
+    type === "REGISTER" ? registerUser() : loginUser();
   };
 
   const registerUser = () => {
     register(formData);
-    openChangePopup('CREATE_PROFILE');
+    openChangePopup("CREATE_PROFILE");
   };
 
   const loginUser = async () => {
     await login(formData);
 
     if (user !== null) {
-      if (typeof user !== 'undefined' && typeof user.profile !== 'undefined') {
+      if (typeof user !== "undefined" && typeof user.profile !== "undefined") {
         return <Redirect to="/home" />;
       }
     }
@@ -63,18 +62,18 @@ const AuthPop = (props) => {
     };
     signInWithGoogle(authData);
 
-    type === 'REGISTER' && openChangePopup('CREATE_PROFILE');
+    type === "REGISTER" && openChangePopup("CREATE_PROFILE");
   };
 
   const responseGoogleFail = async (response) => {
-    console.log('error', response);
-    setError('Signing in with Google failed', 'danger');
+    console.log("error", response);
+    setError("Signing in with Google failed", "danger");
   };
 
   return (
     <PopupContainer title={data}>
       <form onSubmit={(e) => submitHandler(e)}>
-        {type === 'REGISTER' && (
+        {type === "REGISTER" && (
           <div className="form-group">
             <label htmlFor="name">Full Name*</label>
             <input
@@ -123,7 +122,7 @@ const AuthPop = (props) => {
         </div>
         <div className="text-center my-4">
           <button type="submit" className="btn btn-secondary w-50">
-            {type === 'REGISTER' ? 'Register' : 'Log in'}
+            {type === "REGISTER" ? "Register" : "Log in"}
           </button>
         </div>
         <div className="form-row">
@@ -137,17 +136,17 @@ const AuthPop = (props) => {
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
               onSuccess={responseGoogle}
               onFailure={responseGoogleFail}
-              cookiePolicy={'single_host_origin'}
+              cookiePolicy={"single_host_origin"}
             />
           </div>
         </div>
 
-        {type === 'REGISTER' ? (
+        {type === "REGISTER" ? (
           <small className="form-text text-muted text-center mt-4">
             Already have an account?
             <p
               className="pl-2 pointer"
-              onClick={() => openChangePopup('LOGIN')}
+              onClick={() => openChangePopup("LOGIN")}
             >
               Login
             </p>
@@ -157,7 +156,7 @@ const AuthPop = (props) => {
             New user?
             <p
               className="pl-2 pointer"
-              onClick={() => openChangePopup('REGISTER')}
+              onClick={() => openChangePopup("REGISTER")}
             >
               Register
             </p>

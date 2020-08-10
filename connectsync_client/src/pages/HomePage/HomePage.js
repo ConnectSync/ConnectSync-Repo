@@ -14,7 +14,6 @@ import {
 } from "../../redux/action/workplaces";
 import { getAllPosts } from "../../redux/action/posts";
 import WorkplacePopup from "../../components/Popup/WorkplacePopup";
-import AuthPopup from "../../components/Popup/AuthPopup";
 
 import { Redirect } from "react-router-dom";
 import { openChangePopup } from "../../redux/action/popup";
@@ -31,7 +30,6 @@ const HomePage = ({
   getAllPosts,
   popup,
   openChangePopup,
-  loadUser,
   workplaces: { active_workplaces },
 }) => {
   const [worlplaceDetails, setWorkPlaceDetails] = useState({
@@ -59,7 +57,6 @@ const HomePage = ({
   // Join workplace
   const join = async (e) => {
     e.preventDefault();
-    console.log("joining...");
     await joinWorkplace(worlplaceDetails.name);
     popup.activePopup === "JOIN" && openChangePopup("");
   };
@@ -69,8 +66,6 @@ const HomePage = ({
       return <Loader />;
     } else {
       const { workplaces, profile } = user;
-      console.log("Work ", user);
-      console.log("profile ", profile);
 
       if (Array.isArray(workplaces) && workplaces.length) {
         const data = [];
@@ -143,12 +138,7 @@ const HomePage = ({
       }
     }
   };
-  // const performRedirect = () => {
-  //   if (success) {
-  //     modelRef.current.closeModal();
-  //     return <Redirect to="/home" />;
-  //   }
-  // };
+
   if (loading) {
     return <Loader />;
   } else {

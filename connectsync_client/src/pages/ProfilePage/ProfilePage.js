@@ -10,7 +10,6 @@ import {
 } from "../../redux/action/user";
 import "./ProfilePageStyles.scss";
 
-
 const ProfilePage = (props) => {
   const {
     auth,
@@ -75,7 +74,7 @@ const ProfilePage = (props) => {
   ));
 
   return (
-    <div className="profilePage py-5">
+    <div className="profilePage">
       <Navbar />
       <div className="all-center flex-column text-center mt-5">
         <div className="profile-avatar">
@@ -377,4 +376,3 @@ export default connect(mapStateToProps, {
   addSocialLinks,
   addProfileImage,
 })(ProfilePage);
-

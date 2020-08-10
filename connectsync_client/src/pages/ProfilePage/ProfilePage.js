@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import { connect } from "react-redux";
-import { loadUser } from "../../redux/action/auth";
 import {
   addBio,
   addResidence,
@@ -11,14 +10,7 @@ import {
 import "./ProfilePageStyles.scss";
 
 const ProfilePage = (props) => {
-  const {
-    auth,
-    addBio,
-    addResidence,
-    addSocialLinks,
-    addProfileImage,
-    loadUser,
-  } = props;
+  const { auth, addBio, addResidence, addSocialLinks, addProfileImage } = props;
 
   const isLoading = auth.loading;
   const userProps = { ...auth.user };
@@ -78,7 +70,7 @@ const ProfilePage = (props) => {
       <Navbar />
       <div className="all-center flex-column text-center mt-5">
         <div className="profile-avatar">
-          <img src={img} className="profileImg" />
+          <img src={img} className="profileImg" alt={name} />
         </div>
         <div className="all-center flex-column w-50 p-5 bg-white detailsDiv">
           <button
@@ -616,7 +608,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  loadUser,
   addBio,
   addResidence,
   addSocialLinks,

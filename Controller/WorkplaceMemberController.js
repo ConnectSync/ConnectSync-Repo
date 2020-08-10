@@ -3,7 +3,6 @@ const Workplace = require("../models/Workplace");
 const User = require("../models/User");
 
 exports.getAllWorkplaceMember = async (req, res) => {
-  console.log("hello", req.query);
   try {
     const userWorkplaces = JSON.parse(req.query.workplaces);
     const users = await Workplace.find({
@@ -13,7 +12,6 @@ exports.getAllWorkplaceMember = async (req, res) => {
       .populate("members.user", "name img");
     res.json(users);
   } catch (err) {
-    console.error("msg", err.message);
     res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
@@ -80,7 +78,6 @@ exports.addMember = async (req, res) => {
 
     return res.json(data);
   } catch (error) {
-    console.error(error.message);
     return res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };
@@ -148,7 +145,6 @@ exports.removeMember = async (req, res) => {
 
     return res.json(data);
   } catch (error) {
-    console.error(error.message);
     return res.status(500).json({ errors: [{ msg: "Server Error" }] });
   }
 };

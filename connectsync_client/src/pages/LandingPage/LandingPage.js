@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import HeroSection from "../../components/Landing/HeroSection";
 import Navbar from "../../components/Navbar";
 import AuthPopup from "../../components/Popup/AuthPopup";
-import Loader from "../../components/Loader";
 
 import "./LandingPageStyles.scss";
 

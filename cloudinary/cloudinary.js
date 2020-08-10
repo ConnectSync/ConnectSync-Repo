@@ -24,7 +24,6 @@ const storage = multer.diskStorage({
     });
   },
   filename: (req, file, cb) => {
-    console.log("file=", file);
     const now = new Date().toISOString();
     const date = now.replace(/:/g, "-");
     cb(null, date + file.originalname);
@@ -36,7 +35,6 @@ const upload = multer({
   //dest:'uploads/',
   limits: { fileSize: 4 * 1024 * 1024 }, //4 * 1024 * 1024 = 4MB
   fileFilter: (req, file, cb) => {
-    console.log("upload==", file);
     if (
       file.mimetype == "image/jpg" ||
       file.mimetype == "image/png" ||

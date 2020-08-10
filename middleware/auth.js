@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const User = require('../models/User');
 
 module.exports = function (req, res, next) {
@@ -13,7 +12,7 @@ module.exports = function (req, res, next) {
 
   // Verify token
   try {
-    jwt.verify(token, config.get('jwtSecretKey'), async (error, decoded) => {
+    jwt.verify(token, process.env.jwtSecretKey, async (error, decoded) => {
       if (error) {
         return res.status(401).json({ msg: 'Invalid Token' });
       } else {

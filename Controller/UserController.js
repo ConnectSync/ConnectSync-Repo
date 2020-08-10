@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const config = require('config');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const cloudinary = require('cloudinary').v2;
@@ -66,7 +65,7 @@ exports.create = async (req, res) => {
 
     jwt.sign(
       payload,
-      config.get('jwtSecretKey'),
+      process.env.jwtSecretKey,
       { expiresIn: '7 days' },
       (err, token) => {
         if (err) throw err;
@@ -94,7 +93,7 @@ exports.signInWithGoogle = async (req, res) => {
 
       jwt.sign(
         payload,
-        config.get('jwtSecretKey'),
+        process.env.jwtSecretKey,
         { expiresIn: '7 days' },
         (err, token) => {
           if (err) throw err;
@@ -118,7 +117,7 @@ exports.signInWithGoogle = async (req, res) => {
 
       jwt.sign(
         payload,
-        config.get('jwtSecretKey'),
+        process.env.jwtSecretKey,
         { expiresIn: '7 days' },
         (err, token) => {
           if (err) throw err;

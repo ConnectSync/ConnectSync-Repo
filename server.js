@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('config');
+const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 const http = require('http');
 const socket = require('socket.io');
@@ -16,7 +16,7 @@ const {
 } = require('./Controller/GroupChatController');
 
 // db config
-const db = config.get('mongoURI');
+const db = process.env.mongoURI;
 
 //connect to mongodb
 const connectDB = async () => {

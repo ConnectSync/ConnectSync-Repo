@@ -6,9 +6,9 @@ export const openChangePopup = (name, data = null) => (dispatch) => {
   let title = data;
 
   if (name == "REGISTER")
-    title = "This is register dummy text (coming from popup action)";
+    title = "CREATE ACCOUNT";
   if (name == "LOGIN")
-    title = "This is login dummy text (coming from popup action)";
+    title = "LOGIN";
   if (name == "CREATE_PROFILE")
     title = "This is CREATE PROFILE dummy text (coming from popup action)";
 

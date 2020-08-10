@@ -149,6 +149,7 @@ const Profile = ({
           workplace_type={workplace_type}
         />
       )}
+
     </div>
   );
 };

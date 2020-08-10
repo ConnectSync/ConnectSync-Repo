@@ -10,8 +10,8 @@ const Posts = (props) => {
   if (loading) {
     return (
       <div className="all-center">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
     );
@@ -20,8 +20,8 @@ const Posts = (props) => {
 
     return (
       <div className="py-5">
-        {posts.map((data) => {
-          return <Post {...data} />;
+        {posts.map((data,index) => {
+          return <Post key={index} {...data} />;
         })}
       </div>
     );

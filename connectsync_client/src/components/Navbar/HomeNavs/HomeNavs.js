@@ -118,22 +118,26 @@ const HomeNavs = ({ auth, logout }) => {
     <ul className="navbar-nav ml-auto">
       <li className="nav-item px-1">
         <Link to="/home" className="nav-link text-white">
-          Home
+        <i className="fa fa-home fa-1.5x" aria-hidden="true">Home</i>
+          
         </Link>
       </li>
       <li className="nav-item px-1">
         <Link to="/members" className="nav-link text-white">
-          Members
+        <i className="fa fa-users fa-1.5x " aria-hidden="true">Members</i>
+          
         </Link>
       </li>
       <li className="nav-item px-1">
         <Link to="/chats" className="nav-link text-white">
-          Chats
+        <i className="fa fa-comments fa-1.5x" aria-hidden="true">Chats</i>
+          
         </Link>
       </li>
       <li className="nav-item px-1">
         <Link to="/profile" className="nav-link text-white">
-          Profile
+        <i className="fa fa-user fa-1.5x" aria-hidden="true">Profile</i>
+        
         </Link>
       </li>
     </ul>

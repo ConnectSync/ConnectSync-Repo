@@ -14,8 +14,8 @@ router.use('/api/auth', auth);
 router.use('/api/workplace', workplace);
 
 if (process.env.NODE_ENV == 'production') {
-  app.use(express.static('connectsync_client/build'));
-  app.get('*', (req, res) => {
+  router.use(express.static('connectsync_client/build'));
+  router.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }

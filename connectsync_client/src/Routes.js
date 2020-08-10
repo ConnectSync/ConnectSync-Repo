@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
+import CommentPage from "./pages/Comment/CommentPage";
 import LandingPage from "./pages/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Members from "./pages/Members/Members";
@@ -31,6 +32,7 @@ const Routes = () => {
           <PrivateRoute exact path="/home" component={HomePage} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
           <PrivateRoute exact path="/members" component={Members} />
+          <PrivateRoute exact path="/post/:postId/comment" component ={CommentPage} />
         </Switch>
       </Router>
     </Provider>

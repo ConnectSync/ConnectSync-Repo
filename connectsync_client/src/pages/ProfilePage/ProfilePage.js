@@ -137,15 +137,15 @@ const ProfilePage = (props) => {
                   id="bio"
                   onChange={handleChange("bio")}
                 />
-                <div className="actionButtons">
+                <div className="actionButtons text-right">
                   <button
-                    class="btn btn-light mt-1 p-1"
+                    class="btn btn-light btn-sm m-2"
                     onClick={() => setEditInfo("")}
                   >
                     <small>Cancel</small>
                   </button>
                   <button
-                    class="btn btn-secondary mt-1 p-1"
+                    class="btn btn-secondary btn-sm m-2"
                     onClick={() => {
                       addBio(bio);
                       setEditInfo("");
@@ -183,17 +183,23 @@ const ProfilePage = (props) => {
                   name="residence"
                   required
                   id="residence"
+                  list="country"
                   onChange={handleChange("residence")}
                 />
-                <div className="actionButtons">
+
+                {/* country data list start */}
+
+                {/* country data list end */}
+
+                <div className="actionButtons text-right">
                   <button
-                    class="btn btn-light mt-1 p-1"
+                    class="btn btn-light btn-sm m-2"
                     onClick={() => setEditInfo("")}
                   >
                     <small>Cancel</small>
                   </button>
                   <button
-                    class="btn btn-secondary mt-1 p-1"
+                    class="btn btn-secondary btn-sm m-2"
                     onClick={() => {
                       addResidence(residence);
                       setEditInfo("");
@@ -261,8 +267,8 @@ const ProfilePage = (props) => {
               </button>
             )}
             {editInfo === "links" && (
-              <div className="my-1 w-100">
-                <form className="w-100">
+              <div className="my-3 w-100">
+                <form className="w-100 p-3 border">
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="twitter">Twitter handle</label>
@@ -324,15 +330,15 @@ const ProfilePage = (props) => {
                     </div>
                   </div>
                 </form>
-                <div className="actionButtons">
+                <div className="actionButtons text-center">
                   <button
-                    class="btn btn-light mt-1 p-1"
+                    class="btn btn-light btn-sm m-2"
                     onClick={() => setEditInfo("")}
                   >
                     <small>Cancel</small>
                   </button>
                   <button
-                    class="btn btn-secondary mt-1 p-1"
+                    class="btn btn-secondary btn-sm m-2"
                     onClick={() => {
                       let links = {
                         twitter,

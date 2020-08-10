@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
 import LandingPage from "./pages/LandingPage";
+import User from "./pages/User/UserPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Members from "./pages/Members/Members";
 import PrivateRoute from "./components/Common/PrivateRoute";
+import CommentPage from "./pages/Comment/CommentPage";
 
 import { loadUser } from "./redux/action/auth";
 import setAuthToken from "./utils/setAuthToken";
@@ -31,6 +33,12 @@ const Routes = () => {
           <PrivateRoute exact path="/home" component={HomePage} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
           <PrivateRoute exact path="/members" component={Members} />
+          <PrivateRoute exact path="/user/:userId" component={User} />
+          <PrivateRoute
+            exact
+            path="/posts/:postId/comment"
+            component={CommentPage}
+          />
         </Switch>
       </Router>
     </Provider>

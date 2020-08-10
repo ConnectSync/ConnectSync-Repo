@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { connect } from "react-redux";
 import { loadUser } from "../../redux/action/auth";
 import {
@@ -9,7 +9,6 @@ import {
   addProfileImage,
 } from "../../redux/action/user";
 import "./ProfilePageStyles.scss";
-
 
 const ProfilePage = (props) => {
   const {
@@ -75,7 +74,7 @@ const ProfilePage = (props) => {
   ));
 
   return (
-    <div className="profilePage py-5">
+    <div className="profilePage">
       <Navbar />
       <div className="all-center flex-column text-center mt-5">
         <div className="profile-avatar">
@@ -377,4 +376,3 @@ export default connect(mapStateToProps, {
   addSocialLinks,
   addProfileImage,
 })(ProfilePage);
-

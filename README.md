@@ -24,7 +24,7 @@ To spin up the server, run:
 > npm run server
 ```
 
-Create a folder named 'config' and a json file inside it as 'default.json'.
+Create a .env file in the root directory.
 put the mongoURI and cloudinary keys inside the file.
 
 To run the frontend on localhost, go to the directory <mark>connectsync_client</mark> and run:

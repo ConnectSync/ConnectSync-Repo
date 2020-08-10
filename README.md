@@ -16,16 +16,16 @@ npm i && cd connectsync_client && npm i && cd ..
 ```
 
 It will install the required dependencies.
-To spin up the server, run:
-
-```bash
-> nodemon server
-
-> npm run server
-```
 
 Create a .env file in the root directory.
 put the mongoURI and cloudinary keys inside the file.
+
+
+To spin up the server, run:
+
+```bash
+> npm run server
+```
 
 To run the frontend on localhost, go to the directory <mark>connectsync_client</mark> and run:
 

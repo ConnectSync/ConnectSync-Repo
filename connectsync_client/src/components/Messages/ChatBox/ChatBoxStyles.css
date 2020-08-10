@@ -1,0 +1,157 @@
+.user-message-container {
+  display: grid;
+  grid-template-columns: auto;
+  align-content: start;
+  height: calc(100% - 110px);
+  overflow-y: scroll;
+  position: absolute;
+  top: 0px;
+  left: 15px;
+  right: 15px;
+}
+.user-message-container div::-webkit-scrollbar {
+  width: 3px;
+  height: 8px;
+  border-radius: 2px;
+}
+.user-message-container div::-webkit-scrollbar-button {
+  background: transparent;
+  display: none;
+}
+.user-message-container div::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+.user-message-container div:-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.user-notification {
+  align-self: center;
+  justify-self: center;
+  font-size: 11px;
+  color: #5334ff;
+  background: #ebe7ff;
+  padding: 2px 10px;
+  border-radius: 15px;
+  margin: 3px auto;
+  text-align: center;
+  width: 250px;
+}
+
+.user-message {
+  display: grid;
+  grid-template-columns: 30px auto;
+  justify-content: start;
+  grid-column-gap: 30px;
+}
+
+.user-notification + .user-message,
+.user-message + .user-notification {
+  margin-top: 14px;
+}
+
+.user-message {
+  margin-top: 5px;
+}
+
+.user-message img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.time {
+  position: absolute;
+  bottom: 2px;
+  font-size: 7px;
+  color: #999999;
+  width: 36px;
+  right: 6px;
+  z-index: 5;
+}
+
+.username {
+  font-size: 8px;
+  color: #8b8b8b;
+  display: block;
+  line-height: 10px;
+  padding-bottom: 4px;
+}
+
+.user-message.sender .username {
+  display: none;
+}
+
+.img-container {
+  position: relative;
+}
+.user-message.sender {
+  grid-template-columns: auto 22px;
+  justify-content: end;
+}
+
+.user-message.sender img {
+  grid-column: 2;
+  grid-row: 1;
+}
+.user-message-container .message {
+  background: #ffffff;
+  padding: 8px;
+  display: inline-block;
+  position: relative;
+  max-width: 275px;
+  font-size: 12px;
+  border-radius: 7px;
+  z-index: 1;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+  min-width: 119px;
+}
+
+.user-message.sender .message {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.user-message .message::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 14px;
+  top: 8px;
+  left: -18px;
+  background: #ffffff;
+  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  z-index: -1;
+}
+
+.user-message.sender .message::before {
+  right: -18px;
+  left: auto;
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+}
+
+p {
+  margin: 0;
+  overflow-wrap: break-word;
+  height: auto;
+}
+
+@media (min-width: 578px) {
+  .user-message-container .message {
+    padding: 10px;
+    max-width: 275px;
+    font-size: 14px;
+    z-index: 1;
+    min-width: 160px;
+  }
+  .user-message.sender {
+    grid-template-columns: auto 30px;
+  }
+
+  .time {
+    font-size: 8px;
+  }
+  .username {
+    font-size: 10px;
+  }
+}

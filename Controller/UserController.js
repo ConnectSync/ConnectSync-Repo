@@ -1,31 +1,32 @@
-const { validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const config = require("config");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const cloudinary = require("cloudinary").v2;
-const { deleteFile } = require("../cloudinary/cloudinary");
+const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const config = require('config');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const cloudinary = require('cloudinary').v2;
+const { deleteFile } = require('../cloudinary/cloudinary');
 
 exports.index = async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.user.id })
-      .populate("workplaces.workplace", "name img description")
-      .select("-password -updatedAt -createdAt");
+      .populate('workplaces.workplace', 'name img description')
+      .select('-password -updatedAt -createdAt');
+
     res.json(user);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
 exports.getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId)
-      .populate("workplaces.workplace", "name img")
-      .select("-password -updatedAt -createdAt");
+      .populate('workplaces.workplace', 'name img')
+      .select('-password -updatedAt -createdAt');
     res.json(user);
   } catch (err) {
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -43,7 +44,7 @@ exports.create = async (req, res) => {
     let user = await User.findOne({ email });
 
     if (user) {
-      return res.status(400).json({ errors: [{ msg: "User already exists" }] });
+      return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
     }
 
     user = new User({
@@ -65,8 +66,8 @@ exports.create = async (req, res) => {
 
     jwt.sign(
       payload,
-      config.get("jwtSecretKey"),
-      { expiresIn: "7 days" },
+      config.get('jwtSecretKey'),
+      { expiresIn: '7 days' },
       (err, token) => {
         if (err) throw err;
         res.json({ token });
@@ -74,7 +75,7 @@ exports.create = async (req, res) => {
     );
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -93,8 +94,8 @@ exports.signInWithGoogle = async (req, res) => {
 
       jwt.sign(
         payload,
-        config.get("jwtSecretKey"),
-        { expiresIn: "7 days" },
+        config.get('jwtSecretKey'),
+        { expiresIn: '7 days' },
         (err, token) => {
           if (err) throw err;
           return res.json({ token });
@@ -104,7 +105,7 @@ exports.signInWithGoogle = async (req, res) => {
       user = new User({
         name,
         email,
-        method: "GOOGLE",
+        method: 'GOOGLE',
       });
 
       await user.save();
@@ -117,8 +118,8 @@ exports.signInWithGoogle = async (req, res) => {
 
       jwt.sign(
         payload,
-        config.get("jwtSecretKey"),
-        { expiresIn: "7 days" },
+        config.get('jwtSecretKey'),
+        { expiresIn: '7 days' },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
@@ -126,7 +127,7 @@ exports.signInWithGoogle = async (req, res) => {
       );
     }
   } catch (error) {
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -136,12 +137,12 @@ exports.addBio = async (req, res) => {
 
     const profile = await User.findOneAndUpdate(
       { _id: req.user.id },
-      { $set: { "profile.bio": bio } },
+      { $set: { 'profile.bio': bio } },
       { new: true }
-    ).select("-password -updatedAt -createdAt");
+    ).select('-password -updatedAt -createdAt');
     return res.json(profile);
   } catch (error) {
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -152,12 +153,12 @@ exports.addResidence = async (req, res) => {
 
     const profile = await User.findOneAndUpdate(
       { _id: req.user.id },
-      { $set: { "profile.residence": residence } },
+      { $set: { 'profile.residence': residence } },
       { new: true }
-    ).select("-password -updatedAt -createdAt");
+    ).select('-password -updatedAt -createdAt');
     return res.json(profile);
   } catch (error) {
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -174,12 +175,12 @@ exports.addSocialLinks = async (req, res) => {
 
     const profile = await User.findOneAndUpdate(
       { _id: req.user.id },
-      { $set: { "profile.social": socialLinks } },
+      { $set: { 'profile.social': socialLinks } },
       { new: true }
-    ).select("-password -updatedAt -createdAt");
+    ).select('-password -updatedAt -createdAt');
     return res.json(profile);
   } catch (error) {
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -190,12 +191,12 @@ exports.addProfileImage = async (req, res) => {
       { _id: req.user.id },
       { $set: { img: result.secure_url } },
       { new: true }
-    ).select("-password -updatedAt -createdAt");
+    ).select('-password -updatedAt -createdAt');
     if (result.secure_url) {
       deleteFile(req.file.filename);
     }
     return res.json(user);
   } catch (error) {
-    res.status(500).json({ errors: [{ msg: "Server Error" }] });
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };

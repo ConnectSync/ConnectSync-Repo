@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import HomePage from "./pages/HomePage/HomePage";
-import LandingPage from "./pages/LandingPage";
-import User from "./pages/User/UserPage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import Members from "./pages/Members/Members";
-import PrivateRoute from "./components/Common/PrivateRoute";
-import CommentPage from "./pages/Comment/CommentPage";
+import PrivateRoute from './components/Common/PrivateRoute';
 
-import { loadUser } from "./redux/action/auth";
-import setAuthToken from "./utils/setAuthToken";
+import LandingPage from './pages/LandingPage';
+import HomePage from './pages/HomePage/HomePage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import Members from './pages/Members/Members';
+import Messages from './pages/Messages';
+import User from './pages/User/UserPage';
+import CommentPage from './pages/Comment/CommentPage';
+
+import { loadUser } from './redux/action/auth';
+import setAuthToken from './utils/setAuthToken';
 
 // Redux
-import { Provider } from "react-redux";
-import store from "./redux/store";
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -33,6 +35,7 @@ const Routes = () => {
           <PrivateRoute exact path="/home" component={HomePage} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
           <PrivateRoute exact path="/members" component={Members} />
+          <PrivateRoute path="/chats" exact component={Messages} />
           <PrivateRoute exact path="/user/:userId" component={User} />
           <PrivateRoute
             exact

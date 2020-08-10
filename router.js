@@ -13,6 +13,7 @@ router.use('/api/user', user);
 router.use('/api/auth', auth);
 router.use('/api/workplace', workplace);
 
+// for prod
 if (process.env.NODE_ENV == 'production') {
   router.use(express.static('connectsync_client/build'));
   router.get('*', (req, res) => {

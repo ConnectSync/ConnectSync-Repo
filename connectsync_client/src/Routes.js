@@ -32,7 +32,7 @@ const Routes = () => {
           <PrivateRoute exact path="/home" component={HomePage} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
           <PrivateRoute exact path="/members" component={Members} />
-          <PrivateRoute exact path="/post/:postId/comment" component ={CommentPage} />
+          <PrivateRoute exact path="/posts/:postId/comment" component ={CommentPage} />
         </Switch>
       </Router>
     </Provider>

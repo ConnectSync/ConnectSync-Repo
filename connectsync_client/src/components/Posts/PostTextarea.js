@@ -117,6 +117,7 @@ const PostTextarea = (props) => {
 
       
       const createPost = async (event) => {
+        console.log("POST BTN")
         event.preventDefault();
         const fileBtn = document.getElementById("postImg");
         const workPlaceNames = post.workplaceObj.map((item) => {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Profile from "../../components/Profile/Profile";
 import Posts from "../../components/Posts/Posts";
@@ -14,9 +14,11 @@ import {
 } from "../../redux/action/workplaces";
 import { getAllPosts } from "../../redux/action/posts";
 import WorkplacePopup from "../../components/Popup/WorkplacePopup";
-import { Redirect } from "react-router-dom";
 
+import { Redirect } from "react-router-dom";
+import { openChangePopup } from "../../redux/action/popup";
 import { connect } from "react-redux";
+import { loadUser } from "../../redux/action/auth";
 
 const HomePage = ({
   isAuthenticated,
@@ -26,6 +28,8 @@ const HomePage = ({
   joinWorkplace,
   setActiveWorkplaces,
   getAllPosts,
+  popup,
+  openChangePopup,
   workplaces: { active_workplaces },
 }) => {
   const [worlplaceDetails, setWorkPlaceDetails] = useState({
@@ -34,18 +38,7 @@ const HomePage = ({
     type: "",
     success: false,
   });
-  const [modalView, setModalView] = useState("create");
-  const modelRef = useRef();
-  console.log("WOROROR ", active_workplaces);
 
-  //openpopupmodel
-  const popupOpenModal = (view) => {
-    console.log(view);
-    setModalView(view);
-    console.log(modalView);
-    modelRef.current.openModal();
-    getAllPublicWorkplaces();
-  };
   const { name, type, success, description } = worlplaceDetails;
 
   const handleChange = (fieldName) => (event) => {
@@ -59,14 +52,13 @@ const HomePage = ({
   const create = async (e) => {
     e.preventDefault();
     await createWorkplace(worlplaceDetails);
-    setWorkPlaceDetails({ ...worlplaceDetails, success: true });
+    popup.activePopup === "CREATE" && openChangePopup("");
   };
   // Join workplace
   const join = async (e) => {
     e.preventDefault();
-    console.log("joining...");
     await joinWorkplace(worlplaceDetails.name);
-    setWorkPlaceDetails({ ...worlplaceDetails, success: true });
+    popup.activePopup === "JOIN" && openChangePopup("");
   };
 
   const conditionalRender = () => {
@@ -74,8 +66,6 @@ const HomePage = ({
       return <Loader />;
     } else {
       const { workplaces, profile } = user;
-      console.log("Work ", user);
-      console.log("profile ", profile);
 
       if (Array.isArray(workplaces) && workplaces.length) {
         const data = [];
@@ -89,16 +79,15 @@ const HomePage = ({
         return (
           <>
             <div className="col-lg-3 mb-5 p-0 w-75 mx-lg-0 mx-auto">
+              {/* */}
+
               <Profile
-                modalView={modalView}
                 handleChange={handleChange}
                 create={create}
                 join={join}
                 workplace_name={name}
                 workplace_description={description}
                 workplace_type={type}
-                modelRef={modelRef}
-                popupOpenModal={popupOpenModal}
               />
             </div>
             <div className="col-lg-6 ml-lg-4 px-5">
@@ -118,40 +107,38 @@ const HomePage = ({
             </div>
             <div>
               <button
-                onClick={() => popupOpenModal("create")}
+                onClick={() => openChangePopup("CREATE")}
                 className="btn btn-style btn-primary bg-primary px-5"
               >
                 Create
               </button>
               <button
-                onClick={() => popupOpenModal("join")}
+                onClick={() => openChangePopup("JOIN")}
                 className="btn btn-style btn-primary bg-warning px-5 mx-2"
               >
                 Join
               </button>
             </div>
-            <WorkplacePopup
-              modalView={modalView}
-              handleChange={handleChange}
-              create={create}
-              join={join}
-              name={name}
-              description={description}
-              type={type}
-              success={success}
-              modelRef={modelRef}
-            />
+            {(popup.activePopup === "CREATE" ||
+              popup.activePopup === "JOIN") && (
+              //<AuthPopup type={popup.activePopup} data={popup.data} />
+              <WorkplacePopup
+                type={popup.activePopup}
+                handleChange={handleChange}
+                create={create}
+                join={join}
+                name={name}
+                description={description}
+                workplace_type={type}
+                success={success}
+              />
+            )}
           </div>
         );
       }
     }
   };
-  const performRedirect = () => {
-    if (success) {
-      modelRef.current.closeModal();
-      return <Redirect to="/home" />;
-    }
-  };
+
   if (loading) {
     return <Loader />;
   } else {
@@ -166,7 +153,6 @@ const HomePage = ({
               {conditionalRender()}
             </div>
           </div>
-          {performRedirect()}
         </div>
       );
     }
@@ -180,6 +166,7 @@ const mapStateToProps = (state) => {
     error: state.error,
     loading: state.auth.loading,
     workplaces: state.workplaces,
+    popup: state.popup,
   };
 };
 
@@ -190,4 +177,6 @@ export default connect(mapStateToProps, {
   getAllWorkplacesMembers,
   setActiveWorkplaces,
   getAllPosts,
+  openChangePopup,
+  loadUser,
 })(HomePage);

@@ -11,7 +11,6 @@ exports.index = async (req, res) => {
 
     return res.json(workplaces);
   } catch (err) {
-    console.error(err.message);
     return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
@@ -34,7 +33,6 @@ exports.myworkplace = async (req, res) => {
 
     return res.json(workplaces);
   } catch (err) {
-    console.error(err.message);
     return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
@@ -42,7 +40,6 @@ exports.myworkplace = async (req, res) => {
 // @desc get public workplace
 exports.getPublicWorkplace = async (req, res) => {
   try {
-    console.log('params=', req.params.workplaceName);
     const workplaces = await Workplace.findOne({
       name: req.params.workplaceName.trim().toLowerCase(),
       type: 'PUBLIC',
@@ -54,6 +51,20 @@ exports.getPublicWorkplace = async (req, res) => {
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
+  }
+};
+
+exports.getAllWorkplaceMember = async (req, res) => {
+  try {
+    const userWorkplaces = JSON.parse(req.query.workplaces);
+    const users = await Workplace.find({
+      name: userWorkplaces,
+    })
+      .select('members.user')
+      .populate('members.user', 'name img');
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
 
@@ -102,7 +113,6 @@ exports.create = async (req, res) => {
 
     return res.json(newWorkplace); // return the workplace details
   } catch (error) {
-    console.error(error.message);
     return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
@@ -137,7 +147,6 @@ exports.delete = async (req, res) => {
 
     return res.json({ msg: 'workplace removed' });
   } catch (error) {
-    console.error(error.message);
     return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };
@@ -181,7 +190,6 @@ exports.updateDetails = async (req, res) => {
 
     return res.json({ workplace });
   } catch (error) {
-    console.error(error.message);
     return res.status(500).json({ errors: [{ msg: 'Server Error' }] });
   }
 };

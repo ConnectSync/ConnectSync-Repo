@@ -6,9 +6,7 @@ import { loadUser } from "./auth";
 
 export const getUserByID = (userId) => async (dispatch) => {
   try {
-    console.log("id==", userId);
     const res = await api.get(`/user/${userId}`);
-    console.log(res.data);
     dispatch({
       type: GET_USER_BY_ID,
       payload: res.data,
@@ -16,7 +14,6 @@ export const getUserByID = (userId) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -29,7 +26,6 @@ export const getUserByID = (userId) => async (dispatch) => {
 
 export const addProfileImage = (postData) => async (dispatch) => {
   try {
-    console.log("image sending...", postData);
     const token = localStorage.getItem("token");
     const config = {
       headers: {
@@ -48,7 +44,6 @@ export const addProfileImage = (postData) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -67,7 +62,6 @@ export const addBio = (bio) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -86,7 +80,6 @@ export const addResidence = (residence) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -105,7 +98,6 @@ export const addSocialLinks = (links) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 

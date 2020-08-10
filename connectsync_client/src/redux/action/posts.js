@@ -23,7 +23,6 @@ export const getAllPosts = (workplacesObj) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -45,7 +44,6 @@ export const getPostByID = (postId) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -71,7 +69,6 @@ export const addPost = (postData, workplacesObj) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -85,12 +82,14 @@ export const addPost = (postData, workplacesObj) => async (dispatch) => {
 export const addPostWithImage = (postData, workplacesObj) => async (
   dispatch
 ) => {
+  console.log("posting/...", postData);
+  console.log("posting/...000", workplacesObj);
   try {
     const token = localStorage.getItem("token");
     const config = {
       headers: {
         "content-type": "multipart/form-data",
-        "jwt-auth-token": token,
+        "x-auth-token": token,
       },
     };
     const workplaces = JSON.stringify(workplacesObj);
@@ -107,7 +106,6 @@ export const addPostWithImage = (postData, workplacesObj) => async (
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -129,7 +127,6 @@ export const deletePost = (postId) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -151,7 +148,6 @@ export const addLike = (postId) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -173,7 +169,6 @@ export const removeLike = (postId) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -196,7 +191,6 @@ export const addComment = (postId, text) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 
@@ -219,7 +213,6 @@ export const removeComment = (postId, commentId) => async (dispatch) => {
     dispatch(removeError());
   } catch (err) {
     dispatch(removeError());
-    console.log(err);
     if (err.response) {
       const errors = err.response.data.errors;
 

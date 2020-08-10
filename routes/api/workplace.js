@@ -4,6 +4,10 @@ const { check } = require('express-validator');
 const auth = require('../../middleware/auth');
 const WorkplaceController = require('../../Controller/WorkplaceController');
 
+//@routes GET api/workplace/allMembers
+//@desc   get all the Workplace members
+//@access private
+router.get('/allMembers', auth, WorkplaceController.getAllWorkplaceMember);
 //@routes GET api/workplace/
 //@desc   get all the Workplace
 //@access private

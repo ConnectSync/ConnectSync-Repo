@@ -13,7 +13,6 @@ const PostTextarea = (props) => {
         addPostWithImage,
       } = props;
 
-      console.log("Post Propsss ",workplaces)
 
       const selectedWorkplace = workplaces.map((workplace) => {
         const { status } = workplace;
@@ -95,13 +94,14 @@ const PostTextarea = (props) => {
         });
         setPost({ ...post, workplaceObj: workPlaceArray });
       };
-    
+      
       const conditionRender = () => {
         const temp = workplaceObj.some((value, index, array) => {
           return value.isChecked === true;
         });
+        
     
-        if (temp) {
+        if (temp && text) {
           return (
             <div className="text-right p-2">
               <button onClick={createPost} className="btn btn-style btn-sm">
